@@ -1,0 +1,288 @@
+.card .body .col-md-12 {
+  margin-bottom: 0px;
+}
+
+.nobg {
+  background: transparent;
+  box-shadow: none;
+}
+
+.impact {
+  h1 {
+    font-size: 21px;
+    margin-top: 10px;
+  }
+}
+
+.graphbtn {
+  vertical-align: 14px;
+  cursor: pointer;
+  z-index: 9;
+  border-radius: 30px;
+  height: 43px;
+}
+
+.btnright {
+  position: absolute;
+  right: 15px;
+  z-index: 999;
+  top: 2px;
+  button {
+    padding: 0px 7px;
+    img {
+      height: 22px;
+    }
+  }
+}
+
+.borderr {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.darkgreycl {
+  font-size: 13px;
+  font-weight: 500;
+  max-width: 160px;
+  margin: auto;
+}
+
+.card {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25098);
+}
+
+.nobg.card {
+  box-shadow: none;
+}
+
+.greycl {
+  color: #c7c5c5;
+  min-height: 20px;
+  font-size: 12px;
+}
+
+.small {
+  .darkgreycl {
+    max-width: initial;
+  }
+  .col-md-3 {
+    margin-bottom: 0px !important;
+    img {
+      height: 36px !important;
+    }
+  }
+}
+
+mat-radio-group {
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.filterr {
+  padding: 5px 30px;
+  border-radius: 30px;
+  box-shadow: 0px -1px 10px rgba(10, 10, 10, 0.16862745098039217);
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  .row {
+    font-weight: 500;
+  }
+}
+
+.rotatelabel {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.headlabel {
+  white-space: nowrap;
+  margin-bottom: 0px;
+}
+
+.table-smm {
+  font-size: 12px;
+}
+
+.table-med {
+  font-size: 12px;
+  text-align:center th {
+    font-size: 11px;
+    text-align: center;
+  }
+}
+.table.table-striped td {
+  vertical-align: middle;
+}
+
+.table.table-striped tr:nth-child(even) td {
+  background: rgba(16, 16, 16, 0.03);
+  border: none;
+}
+
+.table.table-striped tr:nth-child(odd) td {
+  //background:#fff;
+  border: none;
+}
+
+.table.table-striped tr:last-child td {
+  border-bottom: 1px solid rgba(12, 12, 12, 0.0901961);
+}
+
+.table.table-striped tr:nth-child(2) td {
+  border-top: 1px solid rgba(12, 12, 12, 0.0901961);
+}
+
+.table-smm {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  th {
+    font-size: 10px;
+    vertical-align: middle;
+    text-align: center;
+  }
+}
+
+.redcl {
+  color: red;
+  font-size: 15px;
+  font-weight: 500;
+}
+.redcl:hover:before {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: rgba(0, 0, 0, 0.1);
+  content: "";
+  border-radius: 30px;
+  top: -6px;
+  cursor: pointer;
+}
+
+td .greycl {
+  white-space: nowrap;
+}
+
+.chartval {
+  display: inline-block;
+  min-width: 70px;
+}
+
+@media (min-width: 768px) {
+  .filterdiv {
+    position: absolute;
+    right: 11px;
+    .filterr {
+      margin-left: 142px;
+      margin-top: -49px;
+      z-index: 9;
+      position: relative;
+      button {
+        position: absolute;
+        right: 5px;
+        top: 3px;
+        border-radius: 30px;
+      }
+    }
+  }
+  .col-md-2 {
+    max-width: inherit !important;
+    flex: 1;
+    margin-bottom: 0px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .s-m-10 {
+    margin: 0px 10px !important;
+  }
+  .mob .col-md-3,
+  .mob .col-md-2 {
+    width: 49%;
+    margin-bottom: 20px !important;
+  }
+}
+table.nob td {
+  background: transparent !important;
+  border: none !important;
+  padding: 0px 4px;
+  img {
+    height: 27px;
+    max-width: inherit;
+  }
+}
+.imgcircle {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #f1f1f1;
+  display: inline-block;
+  vertical-align: super;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.109804);
+  margin-right: 2px;
+}
+.label.shadow-style {
+  border-radius: 30px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  max-width: 90px;
+}
+
+.gradient {
+  .darkgreycl {
+    color: #000000;
+  }
+}
+
+.badge-sm {
+  padding: 2px 5px;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.param_det {
+  width: 100%;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #999;
+  padding: 10px;
+  font-family: "Arial";
+  font-size: 13px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
+
+  table {
+    width: 100%;
+    border-spacing: 0px;
+    border-bottom: 2px solid #000;
+
+    tr th {
+      padding: 3px;
+      text-align: left;
+      border-bottom: 2px solid #000;
+      border-top: 2px solid #000;
+      font-size: 9px;
+    }
+
+    tr td {
+      padding: 3px;
+      text-align: left;
+      font-size: 9px;
+      border: 0;
+    }
+  }
+
+  .bg-gray {
+    background: #d1cff7 !important;
+    span {
+      color: #ffffff !important;
+    }
+  }
+}
+
+.apexcharts-yaxis-annotation-label {
+  border-radius: 3;
+}

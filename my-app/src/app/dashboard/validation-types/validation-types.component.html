@@ -1,0 +1,44 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">validation Types</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/dashboard/main"> Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard/main"> Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">
+              {{ program?.vehicleProgramName }}
+            </li>
+			</ul>
+			
+                    <ul class="switchview">
+                     <li  matTooltip="Thumbnail view"><a [ngClass]="{'active':switchh == 'grid'}" (click)="switchview('grid')" ><img src="assets/images/icon/grid.png"></a></li>
+                     <li  matTooltip="List view"><a [ngClass]="{'active':switchh == 'list'}" (click)="switchview('list')"><img src="assets/images/icon/list.png"></a></li>
+                  </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Widgets -->
+    <div class="row"  *ngIf="switchh == 'grid'">
+      <div class="col-lg-4 col-sm-6" *ngFor="let test of tests">
+        <div
+          class="card-box text-center"
+          (click)="gotodurability('dashboard/durability/', program.id, test.id)"
+        >
+          <div class="icon"><img src="{{ test.image }}" /></div>
+          <h5 class="m-t-10 b m-b-10">{{ test.name }}</h5>
+        </div>
+      </div>
+    </div>
+	 <div class="row " *ngIf="switchh == 'list'">
+     </div>
+  </div>
+  
+</section>

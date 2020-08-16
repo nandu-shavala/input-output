@@ -1,0 +1,646 @@
+<section class="card m-t-20 padding-20">
+  <h5 class="b m-t-0 m-b-0 tcolor">Vehicle Statistics</h5>
+  <div class="row" style="margin: 0px;">
+    <div class="col-lg-3 col-sm-6">
+      <div class="card-boxx">
+        <table>
+          <tr>
+            <td>
+              <div>
+                <img src="assets/images/icon/1.png" />
+              </div>
+              <p class="m-t-5 p-t-10 m-b-0">
+                Total Vehicles Running
+              </p>
+            </td>
+            <td>
+              <h1 class="b">
+                <span>{{ vehicleStats?.Totalvehiclsrunning }}</span>
+                <sub class="subcolor">30 </sub>
+              </h1>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card-boxx">
+        <table>
+          <tr>
+            <td>
+              <div>
+                <img src="assets/images/icon/2.png" />
+              </div>
+              <p class="m-t-5 p-t-10 m-b-0">
+                Vehicles Testing Not Yet Started
+              </p>
+            </td>
+            <td>
+              <h1 class="b">
+                <span>{{ vehicleStats?.vehicletestignnotyetstarted }}</span>
+              </h1>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card-boxx">
+        <table>
+          <tr>
+            <td>
+              <div>
+                <img src="assets/images/icon/3.png" />
+              </div>
+              <p class="m-t-5 p-t-10 m-b-0">
+                Vehicles Testing Completed
+              </p>
+            </td>
+            <td>
+              <h1 class="b">
+                <span>{{ vehicleStats?.vehicletestingcomleted }}</span>
+              </h1>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card-boxx">
+        <table>
+          <tr>
+            <td>
+              <div>
+                <img src="assets/images/icon/downtime.png" />
+              </div>
+              <p class="m-t-5 p-t-10 m-b-0">
+                % Schedule Slip
+              </p>
+            </td>
+            <td>
+              <h1 class="b">
+                <span>{{ vehicleStats?.scheduleSlipPerCent }} %</span>
+                <sub class="subcolor">(12 days)</sub>
+              </h1>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card padding-20">
+  <div class="row">
+    <div class="col-md-6">
+      <h5 class="b m-b-5 tcolor">
+        Vehicles Breakdown Trend
+      </h5>
+      <div class="borderr">
+        <div class="col-md-12" style="min-height: 140px;">
+          <div class="row margin-0">
+            <div class="col-lg-6">
+              <table class="subtable">
+                <tbody>
+                  <tr>
+                    <td>
+                      <div>
+                        <img
+                          src="assets/images/icon/breakdown.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+
+                      <p class="m-t-0 p-t-0 m-b-0 tcolor">
+                        Total Vehicles <br />
+                        Breakdown
+                      </p>
+                    </td>
+                    <td>
+                      <div class="border-right p-t-20 p-b-15">
+                        <h1 class="b">
+                          <span class="tcolor">{{
+                            vehicleStats?.totalvehiclesbreakdown
+                          }}</span
+                          ><sub class="subcolor">30</sub>
+                        </h1>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-6">
+              <table class="subtable">
+                <tbody>
+                  <tr>
+                    <td style="width: 57%;">
+                      <div>
+                        <img
+                          src="assets/images/icon/breakdown.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+
+                      <p class="m-t-0 p-t-0 m-b-0 tcolor">
+                        Vehicles Breakdown in last 1 day
+                      </p>
+                    </td>
+                    <td>
+                      <div class="p-t-20 p-b-0">
+                        <h1 class="b">
+                          <span class="tcolor">{{
+                            vehicleStats?.vehiclesbreakdowninlastoneday
+                          }}</span
+                          ><sub class="subcolor"></sub>
+                        </h1>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div
+          style="
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 0px 0px 10px;
+          "
+          class="subchart"
+        >
+          <mat-tab-group animationDuration="0ms">
+            <mat-tab label="All Period">
+              <div
+                *ngIf="vbChartYear_options != {}"
+                echarts
+                [options]="vbChartYear_options"
+                style="height: 220px;"
+              ></div>
+            </mat-tab>
+            <mat-tab label="Last week">
+              <div
+                *ngIf="vbChartWeek_options != {}"
+                echarts
+                [options]="vbChartWeek_options"
+                style="height: 220px;"
+              ></div>
+            </mat-tab>
+            <mat-tab label="Last Month">
+              <div
+                *ngIf="vbChartMonth_options != {}"
+                echarts
+                [options]="vbChartMonth_options"
+                style="height: 220px;"
+              ></div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h5 class="b m-b-5 tcolor">
+        Distance Covered
+      </h5>
+      <div class="borderr">
+        <div class="col-md-12">
+          <div class="row text-center">
+            <div class="col-lg-6">
+              <table class="subtable">
+                <tbody>
+                  <tr>
+                    <td>
+                      <div>
+                        <img
+                          src="assets/images/icon/km.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+
+                      <p class="m-t-0 p-t-0 m-b-0 tcolor">
+                        Average Kms. Covered
+                      </p>
+                    </td>
+                    <td>
+                      <div class="border-right p-t-20 p-b-15">
+                        <h1 class="b">
+                          <span class="tcolor">{{
+                            vehicleStats?.avgkmscovered
+                          }}</span
+                          ><sub class="subcolor"></sub>
+                        </h1>
+                        <div class="subcolor" style="margin-top: -7px;">
+                          (250)
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-lg-6">
+              <table class="subtable">
+                <tbody>
+                  <tr>
+                    <td>
+                      <div>
+                        <img
+                          src="assets/images/icon/downtime.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+
+                      <p class="m-t-0 p-t-0 m-b-0 tcolor">
+                        Average <br />
+                        Downtime
+                      </p>
+                    </td>
+                    <td>
+                      <div class="p-t-20 p-b-0">
+                        <h1 class="b">
+                          <span class="tcolor">{{
+                            vehicleStats?.averagedowntime
+                          }}</span
+                          ><sub class="subcolor"></sub>
+                        </h1>
+                        <div class="subcolor" style="margin-top: -7px;">
+                          (30 days)
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div
+          style="
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 0px 0px 10px;
+          "
+          class="subchart"
+        >
+          <mat-tab-group animationDuration="0ms">
+            <mat-tab label="All Period">
+              <div
+                *ngIf="dcChartYear_options != {}"
+                echarts
+                [options]="dcChartYear_options"
+                style="height: 220px;"
+              ></div>
+            </mat-tab>
+            <mat-tab label="Last week">
+              <div
+                *ngIf="dcChartWeek_options != {}"
+                echarts
+                [options]="dcChartWeek_options"
+                style="height: 220px;"
+              ></div>
+            </mat-tab>
+            <mat-tab label="Last Month">
+              <div
+                *ngIf="dcChartMonth_options != {}"
+                echarts
+                [options]="dcChartMonth_options"
+                style="height: 220px;"
+              ></div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="card padding-20">
+  <div class="row">
+    <div class="col-md-6 p-r-5" *ngIf="reasonsForBrakdown">
+      <h5 class="b m-b-5 tcolor">
+        Reason for Breakdown
+      </h5>
+      <div>
+        <div class="col-md-12 padding-0 m-t-30">
+          <table class="table tcolor noborder">
+            <tr *ngFor="let reason of reasonsForBrakdown">
+              <td class="reason_text1">
+                {{ reason?.TyeofIssue }}
+              </td>
+              <td>
+                <div class="barsscont">
+                  <table style="width: 100%;">
+                    <Tr>
+                      <Td>
+                        <div class="bars_border" width="100%">
+                          <div
+                            class="barss"
+                            [style]="
+                              'width: ' + calcPercentWidth(reason.IssuePercent)
+                            "
+                          ></div>
+                          <div class="iicony">
+                            <img [src]="getImgPathForRFB(reason.TyeofIssue)" />
+                          </div>
+                        </div>
+                      </Td>
+                      <Td style="width: 40px; text-align: center;">
+                        <b>
+                          {{ reason?.VehicleQuantity }}
+                        </b>
+                      </Td>
+                      <td style="width: 46px;">
+                        <app-progress
+                          style="margin-top: -1px; display: inline-block;"
+                          [value]="reason?.IssuePercent"
+                        ></app-progress>
+                      </td>
+                    </Tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="vehicleStats != null">
+      <h5 class="b m-b-5 tcolor">
+        Potential Impact
+      </h5>
+      <div class="gradient">
+        <div class="impact padding-10 borderr tcolor">
+          <div class="row mob text-center">
+            <div class="col-md-4 col-sm-12">
+              <div class="m-t-15">
+                <img src="assets/images/icon/time.png" style="height: 43px;" />
+              </div>
+              <h1 class="b">
+                <span>{{ vehicleStats?.ScheduleDelay }} Days</span>
+              </h1>
+              <div class="greycl">(17%)</div>
+              <p class="m-t-0 p-t-5m-b-0">
+                Schedule Delay Projected
+              </p>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="m-t-15">
+                <img
+                  src="assets/images/icon/calendar.png"
+                  style="height: 43px;"
+                />
+              </div>
+              <h1 class="b">
+                <span>{{
+                  removeTimeFromDateString(
+                    vehicleStats?.Estimatedateofcompletion
+                  )
+                }}</span>
+              </h1>
+              <div class="greycl">(30Mar20)</div>
+              <p class="m-t-0 p-t-5m-b-0">
+                Expected Date of Completion
+              </p>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <div class="m-t-15">
+                <img src="assets/images/icon/cost.png" style="height: 43px;" />
+              </div>
+              <h1 class="b">
+                <span>{{ vehicleStats?.Costofdelay }} </span>
+              </h1>
+              <div class="greycl">(Crore)</div>
+              <p class="m-t-0 p-t-5m-b-0">Cost of Delay</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card padding-20">
+  <div class="row">
+    <div class="col-md-9">
+      <!-- <h5 class="b m-t-20 m-b-5 tcolor">Action to be taken</h5> -->
+      <div>
+        <div class="ngxTableHeader padding-0">
+          <ul class="header-buttons-left ml-0">
+            <li class="dropdown">
+              <h5 class="b m-b-5 tcolor">
+                Action to be taken
+              </h5>
+            </li>
+          </ul>
+
+          <ul class="header-buttons m-r-5">
+            <li class="dropdown m-l-20">
+              <div class="unisearch" style="display: flex; margin-bottom: 7px;">
+                <label for="search-input"
+                  ><i class="material-icons search-icon">search</i></label
+                >
+                <input
+                  placeholder="Search Action Table"
+                  type="text"
+                  [(ngModel)]="textValue"
+                  class="browser-default search-field"
+                  (keyup)="overallSearch($event)"
+                />
+                <!-- <input
+                                placeholder="Search"
+                                type="text"
+                                [(ngModel)]="textValue1"
+                                class="browser-default search-field"
+                                (keyup)="filterDatatable($event)"
+                                aria-label="Search box"
+                              /> -->
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-12 padding-0 table-responsive">
+          <div>
+            <ngx-datatable
+              #table
+              class="material"
+              [rows]="data"
+              [scrollbarH]="true"
+              [sortType]="'multi'"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="'60'"
+              [limit]="appConstants.GRID_PAGE_LIMIT"
+              (sort)="onSort($event)"
+              (select)="onSelect($event)"
+            >
+              <!-- user image  [limit]="10"  (sort)="onSort($event)"  -->
+
+              <ngx-datatable-column name="Issue Category" prop="Issuecategory">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.Issuecategory }}
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Chassis No" prop="chassisino">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.chassisino }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Driver Details" prop="driverdetails">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.driverdetails }}
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column
+                name="Current Location"
+                prop="currentlocation"
+              >
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.currentlocation }}
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Type of Issue" prop="typeofissue">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.typeofissue }}
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Action" prop="ActionName">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.ActionName }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Target Date" prop="targetdate">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  {{ row.targetdate }}
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Responsibility" prop="responsibility">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <div style="display: flex;">
+                    <div
+                      class="imgcircle"
+                      [style]="getImage(row.responsibility)"
+                    ></div>
+                    <span
+                      style="
+                        display: inline-block;
+                        margin-top: 2px;
+                        margin-left: 5px;
+                      "
+                      >{{ row.responsibility }}</span
+                    >
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-column name="Current Status" prop="currentstatus">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <span
+                    [class]="getStatusStyle(row.currentstatus)"
+                    style="white-space: nowrap;"
+                    >{{ row.currentstatus }}</span
+                  >
+                </ng-template>
+              </ngx-datatable-column>
+
+              <ngx-datatable-footer>
+                <ng-template
+                  let-rowCount="rowCount"
+                  let-pageSize="pageSize"
+                  let-selectedCount="selectedCount"
+                  let-curPage="curPage"
+                  let-offset="offset"
+                  ngx-datatable-footer-template
+                >
+                  <div class="page-count">Total Records {{ TotalCount }}</div>
+                  <datatable-pager
+                    [pagerLeftArrowIcon]="'datatable-icon-left'"
+                    [pagerRightArrowIcon]="'datatable-icon-right'"
+                    [pagerPreviousIcon]="'datatable-icon-prev'"
+                    [pagerNextIcon]="'datatable-icon-skip'"
+                    [page]="CurrentPage"
+                    [size]="appConstants.GRID_PAGE_LIMIT"
+                    [count]="TotalCount"
+                    [hidden]="!(TotalCount / appConstants.GRID_PAGE_LIMIT > 1)"
+                    (change)="onFooterPage($event)"
+                  >
+                  </datatable-pager>
+                </ng-template>
+              </ngx-datatable-footer>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 p-l-5 p-t-50">
+      <h5
+        class="b tcolor"
+        style="
+          border: 1px solid #f5f5f5;
+          line-height: 2.4 !important;
+          font-weight: 600 !important;
+          font-size: 15px !important;
+          padding: 6px 6px 6px 10px !important;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        "
+      >
+        Vehicle Location Details
+      </h5>
+      <div class="mapbox">
+        <agm-map
+          [latitude]="lat"
+          [longitude]="lng"
+          [zoom]="zoom"
+          [disableDefaultUI]="false"
+          [zoomControl]="false"
+          (mapClick)="mapClicked($event)"
+          [usePanning]="true"
+        >
+          <agm-marker
+            [latitude]="vehicleLocation != null ? vehicleLocation.latitude : ''"
+            [longitude]="
+              vehicleLocation != null ? vehicleLocation.longitude : ''
+            "
+            [markerDraggable]="true"
+          >
+            <agm-info-window>
+              <strong>InfoWindow content</strong>
+            </agm-info-window>
+          </agm-marker>
+        </agm-map>
+      </div>
+      <div class="detailbox">
+        <h6>Vehicle Location Details :</h6>
+        <table style="width: 100%;" cellpadding="1">
+          <tr>
+            <td>
+              Chassis No.:
+              {{ vehicleLocation?.chassisino }}
+            </td>
+            <td>Place: {{ vehicleLocation?.currentlocation }}</td>
+          </tr>
+          <tr>
+            <td>Latitude: {{ vehicleLocation?.latitude }}</td>
+            <td>Longitude: {{ vehicleLocation?.longitude }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="unisearch" style="display: flex; margin-top: 7px;">
+        <label for="search-input"
+          ><i class="material-icons search-icon">search</i></label
+        >
+        <!-- [(ngModel)]="textValue" -->
+        <input
+          placeholder="Search location by Chassis No."
+          type="text"
+          class="browser-default search-field"
+          aria-label="Search box"
+          (keyup.enter)="locate($event)"
+        />
+      </div>
+    </div>
+  </div>
+</section>

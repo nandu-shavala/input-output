@@ -1,0 +1,73 @@
+.card.card-box {
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25098);
+  border-radius: 5px !important;
+  overflow: hidden;
+}
+.center-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.imgcircle {
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  background: #eee;
+  border-radius: 50%;
+  margin: auto;
+  img {
+    max-height: 54px;
+  }
+}
+
+.imgcircle:hover {
+  background: #ccc;
+}
+
+.imgcircle-sm {
+  height: 20px;
+  padding: 2px;
+  background: #999999;
+  border-radius: 50%;
+  margin: auto;
+  img {
+    max-height: 54px;
+  }
+}
+
+h4 button {
+  background: rgba(0, 0, 0, 0.050980392156862744);
+  vertical-align: 1px;
+}
+.viewform
+  .mat-form-field:not(.mat-form-field-appearance-legacy)
+  .mat-form-field-suffix
+  .mat-icon-button {
+  display: none;
+}
+
+.viewform .mat-select-arrow {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .s-m-10 {
+    margin: 10px;
+  }
+}
+button.mat-mini-fab:hover {
+  background-color: black !important;
+}
+
+::ng-deep
+  .ngx-datatable.fixed-header
+  .datatable-header
+  .datatable-header-inner {
+  padding-left: 4px;
+  left: 4px !important;
+}
+
+::ng-deep .ngx-datatable.material .datatable-body .datatable-row-left {
+  background-color: transparent !important;
+  background-image: none;
+}

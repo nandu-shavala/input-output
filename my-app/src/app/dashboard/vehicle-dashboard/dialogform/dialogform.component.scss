@@ -1,0 +1,63 @@
+.panel {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  .panel-header {
+    padding: 10px;
+    padding-right: 10px !important;
+    background: #eee;
+    white-space: nowrap;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  .panel-header * {
+    margin: 0px;
+  }
+  .panel-body {
+    height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+    /* width */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 5px #ececec;
+      border-radius: 10px;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #e8e8e8;
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #cfcfcf;
+    }
+    ul {
+      -webkit-padding-start: 0px;
+
+      li {
+        padding: 6px 6px 6px 10px;
+        display: inline-block;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.05);
+        margin: 2px;
+        border-radius: 30px;
+        cursor: move;
+
+        &.choosed {
+          background: rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+  }
+}
+
+.overflow {
+  scrollbar-width: thin;
+}

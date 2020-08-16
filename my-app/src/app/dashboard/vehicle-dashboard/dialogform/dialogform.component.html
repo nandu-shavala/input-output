@@ -1,0 +1,142 @@
+<div>
+  <h2 mat-dialog-title>
+    Configure Graph Axis Parameters
+    <button style="float: right;" mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </h2>
+  <div class="border-top p-t-10">
+    <form>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="panel overflow">
+            <div class="panel-header">
+              <h5>Parameters Available</h5>
+            </div>
+            <div class="panel-body">
+              <div class="col-md-12 padding-0">
+                <ul>
+                  <li
+                    *ngFor="let a of availblelist"
+                    (click)="chooseparam(a)"
+                    [ngClass]="{
+                      choosed: a.parameter == selectedparam?.parameter
+                    }"
+                  >
+                    {{ a.parameter }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-md-3"
+          style="justify-content: center; align-items: center; display: flex;"
+        >
+          <div
+            class="panel-body"
+            style="text-align: center; line-height: 46px;"
+          >
+            <!-- <button mat-raised-button color="primary">Assign to X-Axis</button>
+            <br /> -->
+            <button mat-raised-button color="primary" (click)="remove()">
+              {{ "Unassign Param" }}
+            </button>
+            <br />
+            <button mat-raised-button color="primary" (click)="assignX()">
+              {{ "Assign to\nX Axis" }}
+            </button>
+            <button mat-raised-button color="primary" (click)="assignY()">
+              {{ "Assign to\nY Axis" }}
+            </button>
+          </div>
+        </div>
+        <!-- <div class="col-md-3">
+          <div class="panel">
+            <div class="panel-header">
+              <h5>xAxis-Parameters</h5>
+            </div>
+            <div class="panel-body">
+              <div class="col-md-12 padding-0">
+                <ul>
+                  <li><a>Period</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div> -->
+        <div class="col-md-3">
+          <div class="panel overflow">
+            <div class="panel-header">
+              <h5>X Axis - Parameters</h5>
+            </div>
+            <div class="panel-body">
+              <div class="col-md-12 padding-0">
+                <ul>
+                  <li
+                    cdkDrag
+                    *ngFor="let a of xParams"
+                    (click)="chooseparam(a)"
+                    [ngClass]="{
+                      choosed: a.parameter == selectedparam?.parameter
+                    }"
+                  >
+                    {{ a.parameter }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="panel overflow">
+            <div class="panel-header">
+              <h5>Y Axis - Parameters</h5>
+            </div>
+            <div class="panel-body">
+              <div class="col-md-12 padding-0">
+                <ul cdkDropList (cdkDropListDropped)="drop($event)">
+                  <li
+                    cdkDrag
+                    *ngFor="let a of yParams"
+                    (click)="chooseparam(a)"
+                    [ngClass]="{
+                      choosed: a.parameter == selectedparam?.parameter
+                    }"
+                    title="Drag parameter up or down to reorder the graph"
+                  >
+                    {{ a.parameter }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-sec p-t-20 text-right">
+        <span class="text-danger mr-3">{{ this.error }}</span>
+        <button type="button" class="mr-3" mat-button (click)="closeDialog()">
+          Cancel
+        </button>
+        <button
+          class="mr-3"
+          mat-raised-button
+          (click)="reset()"
+          color="secondary"
+        >
+          Reset
+        </button>
+        <button
+          class="mr-3"
+          mat-raised-button
+          (click)="saveParams()"
+          color="primary"
+        >
+          Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

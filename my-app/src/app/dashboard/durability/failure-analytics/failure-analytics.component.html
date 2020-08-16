@@ -1,0 +1,623 @@
+<section class="p-t-20">
+  <div class="row">
+    <div class="col-md-6 l-p-r-5">
+      <div class="card padding-20">
+        <h5 class="b m-t-0 m-b-5 tcolor">Failure Types</h5>
+        <div class="row border margin-0">
+          <div class="col-md-12 padding-0">
+            <highcharts-chart
+              [Highcharts]="_Highcharts"
+              [options]="pieChartOptions"
+              style="width: 100%; height: 277px; display: block;"
+            ></highcharts-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 l-p-l-5">
+      <div class="card padding-20">
+        <h5 class="b m-t-0 m-b-5 tcolor">Failure Trend</h5>
+        <div class="row border margin-0">
+          <div class="col-md-12 padding-0">
+            <mat-tab-group animationDuration="0ms">
+              <mat-tab label="All Period" class="padding-0">
+                <div class="p-t-20">
+                  <div
+                    echarts
+                    [options]="failureChartYear_options"
+                    style="height: 220px;"
+                  ></div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Last week">
+                <div class="p-t-20">
+                  <div
+                    echarts
+                    [options]="failureChartWeek_options"
+                    style="height: 220px;"
+                  ></div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Last Month">
+                <div class="p-t-20">
+                  <div
+                    echarts
+                    [options]="failureChartMonth_options"
+                    style="height: 220px;"
+                  ></div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 l-p-r-5">
+      <div class="card padding-20">
+        <h5 class="b m-t-0 m-b-5 tcolor">MTBF Trend</h5>
+        <div class="row border margin-0">
+          <div class="col-md-12 m-b-0 border-right padding-0">
+            <mat-tab-group animationDuration="0ms">
+              <mat-tab label="All Period">
+                <div class="row">
+                  <div class="p-t-20 col-md-9">
+                    <div
+                      echarts
+                      [options]="mtbfChartYear_options"
+                      style="height: 220px;"
+                    ></div>
+                  </div>
+
+                  <div
+                    class="col-md-3 padding-0 border-left text-center"
+                    style="
+                      justify-content: center;
+                      align-items: center;
+                      display: flex;
+                    "
+                  >
+                    <div class="tcolor">
+                      <h5 class="tcolor" style="margin: 10px 0px;">
+                        MTBF
+                      </h5>
+                      <div>
+                        <img
+                          src="assets/images/icon/mtbf.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <h1 class="b" style="margin: 10px 0px;">
+                        <span class="tcolor">{{ vehicleStats.MTBFtrend }}</span>
+                      </h1>
+
+                      <p class="m-t-0 p-t-5m-b-0 tcolor">
+                        Days
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Last week">
+                <div class="row">
+                  <div class="p-t-20 col-md-9">
+                    <div
+                      echarts
+                      [options]="mtbfChartWeek_options"
+                      style="height: 220px;"
+                    ></div>
+                  </div>
+                  <div
+                    class="col-md-3 padding-0 border-left text-center"
+                    style="
+                      justify-content: center;
+                      align-items: center;
+                      display: flex;
+                    "
+                  >
+                    <div class="tcolor">
+                      <h5 class="tcolor" style="margin: 10px 0px;">
+                        MTBF
+                      </h5>
+                      <div>
+                        <img
+                          src="assets/images/icon/mtbf.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <h1 class="b" style="margin: 10px 0px;">
+                        <span class="tcolor">{{ vehicleStats.MTBFtrend }}</span>
+                      </h1>
+
+                      <p class="m-t-0 p-t-5m-b-0 tcolor">
+                        Days
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Last Month">
+                <div class="row">
+                  <div class="p-t-20 col-md-9">
+                    <div
+                      echarts
+                      [options]="mtbfChartMonth_options"
+                      style="height: 220px;"
+                    ></div>
+                  </div>
+                  <div
+                    class="col-md-3 padding-0 border-left text-center"
+                    style="
+                      justify-content: center;
+                      align-items: center;
+                      display: flex;
+                    "
+                  >
+                    <div class="tcolor">
+                      <h5 class="tcolor" style="margin: 10px 0px;">
+                        MTBF
+                      </h5>
+                      <div>
+                        <img
+                          src="assets/images/icon/mtbf.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <h1 class="b" style="margin: 10px 0px;">
+                        <span class="tcolor">{{ vehicleStats.MTBFtrend }}</span>
+                      </h1>
+
+                      <p class="m-t-0 p-t-5m-b-0 tcolor">
+                        Days
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 l-p-l-5">
+      <div class="card padding-20">
+        <h5 class="b m-t-0 m-b-5 tcolor">MTTR Trend</h5>
+        <div class="row border margin-0">
+          <div class="col-md-12 m-b-0 border-right padding-0">
+            <mat-tab-group animationDuration="0ms">
+              <mat-tab label="All Period">
+                <div class="row">
+                  <div class="p-t-20 col-md-9">
+                    <div
+                      echarts
+                      [options]="mttrChartYear_options"
+                      style="height: 220px;"
+                    ></div>
+                  </div>
+                  <div
+                    class="col-md-3 border-left padding-0 text-center"
+                    style="
+                      justify-content: center;
+                      align-items: center;
+                      display: flex;
+                    "
+                  >
+                    <div class="tcolor">
+                      <h5 class="tcolor" style="margin: 10px 0px;">
+                        MTTR
+                      </h5>
+                      <div>
+                        <img
+                          src="assets/images/icon/mttr.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <h1 class="b" style="margin: 10px 0px;">
+                        <span class="tcolor">{{ vehicleStats.MTTRtrend }}</span>
+                      </h1>
+
+                      <p class="m-t-0 p-t-5m-b-0 tcolor">
+                        Hours
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Last week">
+                <div class="row">
+                  <div class="p-t-20 col-md-9">
+                    <div
+                      echarts
+                      [options]="mttrChartWeek_options"
+                      style="height: 220px;"
+                    ></div>
+                  </div>
+                  <div
+                    class="col-md-3 border-left padding-0 text-center"
+                    style="
+                      justify-content: center;
+                      align-items: center;
+                      display: flex;
+                    "
+                  >
+                    <div class="tcolor">
+                      <h5 class="tcolor" style="margin: 10px 0px;">
+                        MTTR
+                      </h5>
+                      <div>
+                        <img
+                          src="assets/images/icon/mttr.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <h1 class="b" style="margin: 10px 0px;">
+                        <span class="tcolor">{{ vehicleStats.MTTRtrend }}</span>
+                      </h1>
+
+                      <p class="m-t-0 p-t-5m-b-0 tcolor">
+                        Hours
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Last Month">
+                <div class="row">
+                  <div class="p-t-20 col-md-9">
+                    <div
+                      echarts
+                      [options]="mttrChartMonth_options"
+                      style="height: 220px;"
+                    ></div>
+                  </div>
+                  <div
+                    class="col-md-3 border-left padding-0 text-center"
+                    style="
+                      justify-content: center;
+                      align-items: center;
+                      display: flex;
+                    "
+                  >
+                    <div class="tcolor">
+                      <h5 class="tcolor" style="margin: 10px 0px;">
+                        MTTR
+                      </h5>
+                      <div>
+                        <img
+                          src="assets/images/icon/mttr.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <h1 class="b" style="margin: 10px 0px;">
+                        <span class="tcolor">{{ vehicleStats.MTTRtrend }}</span>
+                      </h1>
+
+                      <p class="m-t-0 p-t-5m-b-0 tcolor">
+                        Hours
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="card padding-20 ng-star-inserted">
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="b m-b-5 tcolor">
+        Breakdown Vehicles
+      </h5>
+      <mat-accordion class="expansionpanel" *ngIf="breakdownVehicles != null">
+        <mat-expansion-panel
+          hideToggle="true"
+          *ngFor="let failureType of breakdownVehicles"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div class="iconplus">
+                <span class="pluscl"> + </span>
+                <span class="minuscl"> - </span>
+              </div>
+              <h5>
+                <div class="imicon">
+                  <img [src]="BASE_URL + failureType.failureimage" />
+                </div>
+                {{ failureType.failureComponent }} Failure
+                <div class="rightal">
+                  <app-progress
+                    [value]="
+                      (
+                        (failureType.Failurepercent /
+                          getSumOfFailureTypes(breakdownVehicles)) *
+                        100
+                      ).toFixed(1)
+                    "
+                  ></app-progress>
+                  <span class="batcl">
+                    <h4>
+                      {{ failureType.actions?.length }}
+                    </h4>
+                  </span>
+                </div>
+              </h5>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="row">
+            <div class="col-md-12 padding-0 table-responsive">
+              <table
+                class="table table-med table-bdv table-striped table-hover"
+              >
+                <tr>
+                  <th>Chassis No</th>
+                  <th>Location</th>
+                  <th>Driver Details</th>
+                  <th>Driver Experience</th>
+                  <th>Contact Number</th>
+                  <th>Action</th>
+                  <th>Target Date</th>
+                  <th>Responsibility</th>
+                  <th>Current Status</th>
+                </tr>
+                <tr *ngFor="let action of failureType.actions">
+                  <td>
+                    <a
+                      [routerLink]="
+                        '/dashboard/vehicle-dashboard/' +
+                        programId +
+                        '/' +
+                        testId +
+                        '/' +
+                        action.reasonsforbreakdownactionId
+                      "
+                      >{{ action.chassisino }}
+                    </a>
+                  </td>
+                  <td>{{ action.currentlocation }}</td>
+                  <td>
+                    {{ action.driverFirstName }}
+                  </td>
+                  <td>{{ action.driverExperience }}</td>
+                  <td>{{ action.driverContactNumber }}</td>
+                  <td>{{ action.ActionName }}</td>
+                  <td>{{ action.targetdate }}</td>
+                  <td>
+                    <div style="display: flex;">
+                      <div
+                        class="imgcircle"
+                        [style]="getImage(action.responsibility)"
+                      ></div>
+                      <span
+                        style="
+                          display: inline-block;
+                          margin-left: 6px;
+                          margin-top: 2px;
+                        "
+                        >{{ action.responsibility }}</span
+                      >
+                    </div>
+                  </td>
+                  <td>
+                    <span [class]="getStatusStyle(action.currentstatus)">{{
+                      action.currentstatus
+                    }}</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</section>
+<section class="card padding-20 ng-star-inserted">
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="b m-b-5 tcolor">
+        Potential Impact
+      </h5>
+      <div>
+        <div class="impact gradient bh1 padding-10">
+          <div class="row mob text-center p-t-20">
+            <div class="col-md-4 border-right">
+              <img src="assets/images/icon/alert.png" style="height: 50px;" />
+              <h1 class="b">
+                <span class="tcolor"
+                  >{{ vehicleStats?.Proboffailurebyendoftest }}%</span
+                >
+              </h1>
+              <div class="greycl">
+                STD AVG - 17% Historic Average : 15%
+              </div>
+              <p class="m-t-0 p-t-5 m-b-0 tcolor">
+                Probability of Failure Rate by End of Test
+              </p>
+            </div>
+            <div class="col-md-4 border-right">
+              <div>
+                <img
+                  src="assets/images/icon/calendar.png"
+                  style="height: 50px;"
+                />
+              </div>
+              <h1 class="b">
+                <span class="tcolor">{{
+                  vehicleStats?.expectednoofdaysofdelay
+                }}</span>
+              </h1>
+              <div class="greycl">(Days)</div>
+              <p class="m-t-0 p-t-5 m-b-0 tcolor">
+                Expected Number of Days of Delay
+              </p>
+            </div>
+            <div class="col-md-4">
+              <img src="assets/images/icon/cost.png" style="height: 50px;" />
+              <h1 class="b">
+                <span class="tcolor">{{
+                  vehicleStats?.Potentialcostoddelay
+                }}</span>
+              </h1>
+              <div class="greycl">(Crore)</div>
+              <p class="m-t-0 p-t-5 m-b-0 tcolor">
+                Potential Cost of Delay
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card padding-20">
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <div class="ngxTableHeader">
+          <ul class="header-buttons-left ml-0">
+            <li class="dropdown">
+              <h5 class="b m-b-5 tcolor">
+                Action to be taken
+              </h5>
+            </li>
+          </ul>
+
+          <ul class="header-buttons m-r-20">
+            <li class="dropdown m-l-20">
+              <label for="search-input"
+                ><i class="material-icons search-icon">search</i></label
+              >
+              <input
+                placeholder="Search"
+                type="text"
+                [(ngModel)]="textValue2"
+                class="browser-default search-field"
+                (keyup)="overallSearch($event)"
+              />
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-12 padding-0 table-responsive">
+          <ngx-datatable
+            #table
+            class="material"
+            [rows]="Failure_Data"
+            [scrollbarH]="true"
+            [sortType]="'multi'"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="60"
+            [limit]="appConstants.GRID_PAGE_LIMIT"
+            (sort)="Failure_onSort($event)"
+            (select)="Failure_onSelect($event)"
+          >
+            <!-- user image  [limit]="10"  (sort)="onSort($event)"  -->
+
+            <ngx-datatable-column
+              name="Action ID"
+              prop="ActionId"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.ActionId }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column
+              name="Issue Category"
+              prop="Issuecategory"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.Issuecategory }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Action" prop="ActionName" width="500">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.ActionName }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="Target Date"
+              prop="targetdate"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.targetdate }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="Responsibility"
+              prop="responsibility"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div style="display: flex;">
+                  <div
+                    class="imgcircle"
+                    [style]="getImage(row.responsibility)"
+                  ></div>
+                  <span
+                    style="
+                      display: inline-block;
+                      margin-top: 2px;
+                      margin-left: 5px;
+                    "
+                    >{{ row.responsibility }}</span
+                  >
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="Current Status"
+              prop="currentstatus"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span [class]="getStatusStyle(row.currentstatus)">{{
+                  row.currentstatus
+                }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-footer>
+              <ng-template
+                let-rowCount="rowCount"
+                let-pageSize="pageSize"
+                let-selectedCount="selectedCount"
+                let-curPage="curPage"
+                let-offset="offset"
+                ngx-datatable-footer-template
+              >
+                <div class="page-count">
+                  Total Records {{ Failure_TotalCount }}
+                </div>
+                <datatable-pager
+                  [pagerLeftArrowIcon]="'datatable-icon-left'"
+                  [pagerRightArrowIcon]="'datatable-icon-right'"
+                  [pagerPreviousIcon]="'datatable-icon-prev'"
+                  [pagerNextIcon]="'datatable-icon-skip'"
+                  [page]="CurrentPage"
+                  [size]="appConstants.GRID_PAGE_LIMIT"
+                  [count]="Failure_TotalCount"
+                  [hidden]="
+                    !(Failure_TotalCount / appConstants.GRID_PAGE_LIMIT > 1)
+                  "
+                  (change)="Failure_onFooterPage($event)"
+                >
+                </datatable-pager>
+              </ng-template>
+            </ngx-datatable-footer>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

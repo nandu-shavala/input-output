@@ -1,0 +1,82 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{ test?.testName }}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/dashboard/main"> Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard/main"> Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard/validation-types/{{ program?.id }}">
+                {{ program?.vehicleProgramName }}</a
+              >
+            </li>
+            <li class="breadcrumb-item active">{{ test?.testName }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Widgets -->
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card nobg">
+          <div class="body">
+            <h5 class="b m-t-0 m-b-10 tcolor">On-Road Test</h5>
+            <div *ngIf="!pdfLoading; else spinner">
+              <div class="btnright">
+                <button
+                  mat-icon-button
+                  style="padding: 0px 7px;"
+                  (click)="captureScreen('durability')"
+                  title="Export as PDF"
+                >
+                  <img style="height: 22px;" src="assets/images/icon/pdf.png" />
+                </button>
+              </div>
+            </div>
+            <ng-template #spinner
+              ><div class="btnright" style="padding: 0px 7px;">
+                <mat-spinner diameter="22"></mat-spinner></div
+            ></ng-template>
+            <div #content id="contentToConvert">
+              <mat-tab-group
+                dynamicHeight
+                class="hjh"
+                *ngIf="vehicleStats != null"
+                animationDuration="0ms"
+              >
+                <mat-tab label="Overall Progress">
+                  <ng-template matTabContent>
+                    <overall-progress
+                      [vehicleStats]="vehicleStats"
+                    ></overall-progress>
+                  </ng-template>
+                </mat-tab>
+                <mat-tab label="Speed Analytics">
+                  <ng-template matTabContent>
+                    <speed-analytics [vehicleStats]="vehicleStats">
+                    </speed-analytics>
+                  </ng-template>
+                </mat-tab>
+                <mat-tab label="Failure Analytics">
+                  <ng-template matTabContent>
+                    <failure-analytics
+                      [vehicleStats]="vehicleStats"
+                    ></failure-analytics>
+                  </ng-template>
+                </mat-tab>
+              </mat-tab-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

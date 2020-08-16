@@ -1,0 +1,566 @@
+<section class="content">
+  <div class="container-fluid">
+    <!-- Basic Examples -->
+
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Manage Vehicle</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              Settings
+            </li>
+            <li class="breadcrumb-item active">Manage Vehicle</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card card-box s-m-10">
+          <div class="body">
+            <div>
+              <div class="col-sm-12">
+                <div class="ngxTableHeader">
+                  <ul class="header-buttons-left ml-0">
+                    <li class="dropdown">
+                      <h5 class="b m-t-10 m-b-5 tcolor">List of Vehicle</h5>
+                    </li>
+                  </ul>
+
+                  <ul
+                    class="header-buttons"
+                    style="margin-right: 15px !important; padding-top: 10px;"
+                  >
+                    <li class="dropdown m-l-20">
+                      <div class="unisearch" style="display: flex;">
+                        <label for="search-input"
+                          ><i class="material-icons search-icon"
+                            >search</i
+                          ></label
+                        >
+                        <input
+                          placeholder="Search"
+                          type="text"
+                          [(ngModel)]="textValue"
+                          class="browser-default search-field"
+                          (keyup)="filterDatatable($event)"
+                          aria-label="Search box"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="icon-button-demo">
+                        <button
+                          style="vertical-align: 10px;"
+                          mat-mini-fab
+                          color="primary"
+                          data-toggle="modal"
+                          data-target="#addModal"
+                          (click)="addRow(createVehicle, formDirective)"
+                          title="Add"
+                        >
+                          <mat-icon class="col-white">add</mat-icon>
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="col-md-12 padding-0 table-responsive">
+                  <ngx-datatable
+                    #table
+                    class="material"
+                    [rows]="data"
+                    [sortType]="'multi'"
+                    [scrollbarH]="true"
+                    [columnMode]="'force'"
+                    [headerHeight]="50"
+                    [footerHeight]="50"
+                    [rowHeight]="'60'"
+                    [limit]="appConstants.GRID_PAGE_LIMIT"
+                    (sort)="onSort($event)"
+                    (select)="onSelect($event)"
+                    [selectionType]="'checkbox'"
+                  >
+                    <!-- user image  [limit]="10"  (sort)="onSort($event)"  -->
+
+                    <ngx-datatable-column *ngIf="false" name="Id" [width]="130">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{ row.id }}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <!-- <ngx-datatable-column name="Program" [width]="130"></ngx-datatable-column> -->
+                    <!--
+                  <ngx-datatable-column name="" sortable="false" [width]="40">
+                    <ng-template
+                      let-value="value"
+                      let-row="row"
+                      let-rowIndex="rowIndex"
+                      ngx-datatable-cell-template
+                    >
+                      <mat-checkbox></mat-checkbox>
+                    </ng-template>
+                  </ngx-datatable-column> -->
+
+                    <ngx-datatable-column
+                      [width]="30"
+                      [sortable]="false"
+                      [canAutoResize]="false"
+                      [headerCheckboxable]="true"
+                    >
+                      <ng-template
+                        ngx-datatable-header-template
+                        let-value="value"
+                        let-allRowsSelected="allRowsSelected"
+                        let-selectFn="selectFn"
+                      >
+                        <label class="checkbox-container">
+                          <input
+                            type="checkbox"
+                            class="ngx-datatable-checkbox"
+                            [checked]="allRowsSelected === true ? true : false"
+                            (change)="selectFn(!allRowsSelected)"
+                          />
+                          <span class="checkmark header-checkmark"></span>
+                        </label>
+                      </ng-template>
+                      <ng-template
+                        ngx-datatable-cell-template
+                        let-value="value"
+                        let-isSelected="isSelected"
+                        let-onCheckboxChangeFn="onCheckboxChangeFn"
+                      >
+                        <label class="checkbox-container">
+                          <input
+                            type="checkbox"
+                            class="ngx-datatable-checkbox"
+                            [checked]="isSelected"
+                            (change)="onCheckboxChangeFn($event)"
+                          />
+                          <span class="checkmark"></span>
+                        </label>
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column
+                      name="Program"
+                      prop="vehicleProgramId"
+                      [width]="130"
+                    >
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <img
+                          style="
+                            background-color: #ccc;
+                            padding: 5px 3px;
+                            border-radius: 50%;
+                          "
+                          src="{{ baseURL }}{{ row.programImage }}"
+                          width="32"
+                        />
+                        {{ row.vehicleProgramName }}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column
+                      name="Vehicle Chasis No"
+                      prop="chassisNo"
+                      [width]="130"
+                    >
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{ row.chassisNo }}
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column
+                      name="Date of Mfg"
+                      prop="dateOfMfg"
+                      [width]="130"
+                    >
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{ row.dateOfMfg }}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <!-- <ngx-datatable-column name="Date of Mfg." [width]="120"></ngx-datatable-column> -->
+
+                    <!-- action buttons -->
+                    <ngx-datatable-column
+                      name="Assign Test"
+                      sortable="false"
+                      [width]="100"
+                      *ngIf="isAdmin"
+                    >
+                      <ng-template
+                        let-value="value"
+                        let-row="row"
+                        let-rowIndex="rowIndex"
+                        ngx-datatable-cell-template
+                      >
+                        <span>
+                          <button
+                            class="btn btn-tbl-edit tblActnBtn h-auto"
+                            (click)="gotopage('settings/assign', row)"
+                            title="Assign Test"
+                          >
+                            <img src="assets/images/icon/assign.png" />
+                          </button>
+                        </span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column
+                      name="Details"
+                      sortable="false"
+                      [width]="100"
+                    >
+                      <ng-template
+                        let-value="value"
+                        let-row="row"
+                        let-rowIndex="rowIndex"
+                        ngx-datatable-cell-template
+                      >
+                        <span>
+                          <button
+                            data-target="#addModal"
+                            data-toggle="modal"
+                            (click)="view(row)"
+                            class="btn btn-tbl-edit tblActnBtn h-auto"
+                            title="Details"
+                          >
+                            <img src="assets/images/icon/search.png" />
+                          </button>
+                        </span>
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-column
+                      name="Edit"
+                      sortable="false"
+                      [width]="100"
+                    >
+                      <ng-template
+                        let-value="value"
+                        let-row="row"
+                        let-rowIndex="rowIndex"
+                        ngx-datatable-cell-template
+                      >
+                        <span>
+                          <button
+                            class="btn btn-tbl-edit tblActnBtn h-auto"
+                            data-target="#addModal"
+                            data-toggle="modal"
+                            (click)="editRow(row)"
+                            title="Edit"
+                          >
+                            <img src="assets/images/icon/edit.png" />
+                          </button>
+                        </span>
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column
+                      name="Delete"
+                      sortable="false"
+                      [width]="100"
+                    >
+                      <ng-template
+                        let-value="value"
+                        let-row="row"
+                        let-rowIndex="rowIndex"
+                        ngx-datatable-cell-template
+                      >
+                        <span>
+                          <button
+                            class="btn btn-tbl-edit tblActnBtn h-auto"
+                            (click)="deleteRow(row)"
+                            title="Delete"
+                          >
+                            <img src="assets/images/icon/bin.png" />
+                          </button>
+                        </span>
+                      </ng-template>
+                    </ngx-datatable-column>
+
+                    <ngx-datatable-footer>
+                      <ng-template
+                        let-rowCount="rowCount"
+                        let-pageSize="pageSize"
+                        let-selectedCount="selectedCount"
+                        let-curPage="curPage"
+                        let-offset="offset"
+                        ngx-datatable-footer-template
+                      >
+                        <div class="page-count">
+                          Total Records {{ TotalCount }}
+                        </div>
+                        <datatable-pager
+                          [pagerLeftArrowIcon]="'datatable-icon-left'"
+                          [pagerRightArrowIcon]="'datatable-icon-right'"
+                          [pagerPreviousIcon]="'datatable-icon-prev'"
+                          [pagerNextIcon]="'datatable-icon-skip'"
+                          [page]="CurrentPage"
+                          [size]="appConstants.GRID_PAGE_LIMIT"
+                          [count]="TotalCount"
+                          [hidden]="
+                            !(TotalCount / appConstants.GRID_PAGE_LIMIT > 1)
+                          "
+                          (change)="onFooterPage($event)"
+                        >
+                        </datatable-pager>
+                      </ng-template>
+                    </ngx-datatable-footer>
+                  </ngx-datatable>
+                </div>
+
+                <!-- Add Record Modal Window -->
+                <div
+                  class="modal fade"
+                  id="addModal"
+                  #myModal
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <div class="editRowModal">
+                          <div class="modal-header clearfix">
+                            <img
+                              src="assets/images/icon/car.png"
+                              style="height: 30px;"
+                              alt="avatar"
+                            />
+                            <div class="modal-about">
+                              <div
+                                class="tcolor font-weight-bold p-t-0 font-17"
+                              >
+                                {{ Opctions }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          #closeModal
+                          mat-icon-button
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                      <div class="modal-body" style="padding: 0px;">
+                        <form
+                          class="register-form m-4"
+                          [formGroup]="createVehicle"
+                          #formDirective="ngForm"
+                        >
+                          <div class="row">
+                            <div
+                              class="col-md-7 col-sm-12 mb-2"
+                              style="padding-top: 10px;"
+                            >
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Vehicle Program</mat-label>
+                                <input
+                                  matInput
+                                  (input)="doVehicleProgramsFilter($event)"
+                                  [matAutocomplete]="acVehicleProgram"
+                                  formControlName="vehicleprogram"
+                                  type="text"
+                                  [disabled]="isReadOnly"
+                                  (blur)="onVehicleProgramBlur($event)"
+                                  [readonly]="isReadOnly"
+                                  required
+                                />
+                                <mat-autocomplete
+                                  #acVehicleProgram
+                                  (optionSelected)="onVehicleProgramSelected()"
+                                  [displayWith]="displayFnVP"
+                                >
+                                  <mat-option
+                                    *ngFor="
+                                      let gender of filteredVehiclePrograms
+                                    "
+                                    [value]="gender.id"
+                                  >
+                                    {{ gender.vehicleProgramName }}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Chasis Number </mat-label>
+                                <input
+                                  matInput
+                                  formControlName="chasisnumber"
+                                  [readonly]="isReadOnly"
+                                  required
+                                />
+                              </mat-form-field>
+
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Date of Mfg</mat-label>
+                                <input
+                                  matInput
+                                  [matDatepicker]="picker1"
+                                  formControlName="dateofmfg"
+                                  [disabled]="isReadOnly"
+                                />
+
+                                <!-- <input matInput [matDatepicker]="picker"
+                                                                    formControlName="dateofmfg" [readonly]="isReadOnly"
+                                                                    required> -->
+                                <mat-datepicker-toggle
+                                  matSuffix
+                                  [for]="picker1"
+                                  [disabled]="isReadOnly"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                              </mat-form-field>
+
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Driver Assigned name</mat-label>
+                                <input
+                                  matInput
+                                  [readonly]="isReadOnly"
+                                  formControlName="driverassigned"
+                                />
+                              </mat-form-field>
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Vehicle Status</mat-label>
+
+                                <input
+                                  matInput
+                                  (input)="doVehicleStatusFilter($event)"
+                                  [matAutocomplete]="acVehicleStatus"
+                                  formControlName="vehiclestatus"
+                                  type="text"
+                                  [disabled]="isReadOnly"
+                                  (blur)="onVehicleStatusBlur($event)"
+                                  [readonly]="isReadOnly"
+                                  required
+                                />
+
+                                <mat-autocomplete
+                                  #acVehicleStatus
+                                  (optionSelected)="onVehicleStatusSelected()"
+                                  required
+                                >
+                                  <mat-option
+                                    *ngFor="let status of filteredVehicleStatus"
+                                    [value]="status.value"
+                                  >
+                                    {{ status.value }}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Planned test start date</mat-label>
+                                <input
+                                  matInput
+                                  [matDatepicker]="ppicker"
+                                  formControlName="pstartdate"
+                                  required
+                                  [readonly]="isReadOnly"
+                                />
+
+                                <mat-datepicker-toggle
+                                  matSuffix
+                                  [for]="ppicker"
+                                  [disabled]="isReadOnly"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #ppicker></mat-datepicker>
+                              </mat-form-field>
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Planned test end date</mat-label>
+                                <input
+                                  matInput
+                                  [matDatepicker]="p2picker"
+                                  formControlName="penddate"
+                                  required
+                                  [readonly]="isReadOnly"
+                                />
+
+                                <mat-datepicker-toggle
+                                  matSuffix
+                                  [for]="p2picker"
+                                  [disabled]="isReadOnly"
+                                >
+                                </mat-datepicker-toggle>
+                                <mat-datepicker #p2picker></mat-datepicker>
+                              </mat-form-field>
+                            </div>
+                            <div class="col-lg-5 center-align border-left">
+                              <div>
+                                <input
+                                  style="display: none;"
+                                  type="file"
+                                  (change)="onFileChanged($event)"
+                                  #fileInput
+                                />
+                                <div
+                                  title="Click to upload image"
+                                  (click)="
+                                    isReadOnly === true || fileInput.click()
+                                  "
+                                  class="imgcircle center-align"
+                                >
+                                  <!-- <img formControlName="imagePath"> -->
+
+                                  <!-- <img [src]="transform()"> -->
+                                  <img src="{{ imagePath }}" />
+                                </div>
+                                <!-- <h4 class="tcolor">
+                                  Program Name
+                                  <button mat-icon-button>
+                                    <mat-icon>edit</mat-icon>
+                                  </button>
+                                </h4> -->
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div
+                              class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2"
+                            >
+                              <div [hidden]="isShow">
+                                <button
+                                  class="mr-3"
+                                  [disabled]="!createVehicle.valid"
+                                  (click)="
+                                    onAddRowSave(createVehicle, formDirective)
+                                  "
+                                  mat-raised-button
+                                  color="primary"
+                                >
+                                  Submit
+                                </button>
+                                <button
+                                  (click)="cancel(createVehicle)"
+                                  type="button"
+                                  mat-button
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

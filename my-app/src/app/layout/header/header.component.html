@@ -1,0 +1,143 @@
+<nav #navbar class="navbar" [ngClass]="isNavbarShow ? 'active' : 'inactive'">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a
+        href="#"
+        onClick="return false;"
+        class="navbar-toggle collapsed"
+        data-toggle="collapse"
+        data-target="#navbar-collapse"
+        aria-expanded="false"
+      ></a>
+      <!-- mobile menu bars -->
+      <a
+        href="#"
+        onClick="return false;"
+        class="bars"
+        (click)="mobileMenuSidebarOpen($event, 'overlay-open')"
+      ></a>
+
+      <img
+        src="assets/images/logo.png"
+        class="logo"
+        alt=""
+        style="height: 48px; margin-top: -5px;"
+      />
+      <img
+        src="assets/images/logosm.png"
+        class="logosm"
+        alt=""
+        style="height: 48px; margin-top: -5px;"
+      />
+    </div>
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <ul class="pull-left collapse-menu-icon">
+        <li>
+          <button
+            mat-icon-button
+            (click)="callSidemenuCollapse()"
+            class="sidemenu-collapse"
+            [matTooltip]="collapseTitle"
+          >
+            <mat-icon>menu</mat-icon>
+          </button>
+        </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <!-- Full Screen Button -->
+
+        <li>
+          <div class="unisearch" style="display: flex; margin-top: 7px;">
+            <label for="search-input"
+              ><i class="material-icons search-icon">search</i></label
+            >
+            <input
+              placeholder="Search"
+              type="text"
+              class="browser-default search-field"
+              aria-label="Search box"
+            />
+          </div>
+        </li>
+        <!-- #END# Notifications-->
+        <li class="dropdown user_profile">
+          <a
+            href="#"
+            onClick="return false;"
+            data-toggle="dropdown"
+            role="button"
+            class="pt-0"
+          >
+            <div class="userlabel">
+              {{ currentUser?.firstName + " " + currentUser?.lastName }}
+              <div class="titl">{{ currentUser?.role }}</div>
+            </div>
+            <div
+              class="imgcircle"
+              [style]="getImage(currentUser?.firstName)"
+            ></div>
+            <!-- <img
+              src="assets/images/usrbig.jpg"
+              class="rounded-circle"
+              alt="User"
+            /> -->
+          </a>
+          <ul class="dropdown-menu pullDown">
+            <li class="body">
+              <ul class="user_dw_menu">
+                <li>
+                  <a href="#" onClick="return false;">
+                    <mat-icon aria-hidden="false" class="mr-2">person</mat-icon
+                    >Profile
+                  </a>
+                </li>
+                <li>
+                  <a href="#" onClick="return false;">
+                    <mat-icon aria-hidden="false" class="mr-2"
+                      >feedback</mat-icon
+                    >Feedback
+                  </a>
+                </li>
+                <li>
+                  <a href="#" onClick="return false;">
+                    <mat-icon aria-hidden="false" class="mr-2">help</mat-icon
+                    >Help
+                  </a>
+                </li>
+                <li>
+                  <a [routerLink]="" (click)="logout()">
+                    <mat-icon aria-hidden="false" class="mr-2"
+                      >power_settings_new</mat-icon
+                    >Logout
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="fullscreen">
+          <button
+            matTooltip="Full Screen"
+            mat-icon-button
+            (click)="callFullscreen()"
+            class="nav-notification-icons"
+          >
+            <mat-icon>fullscreen</mat-icon>
+          </button>
+        </li>
+        <!-- #END# Tasks -->
+        <li class="pull-right">
+          <button
+            matTooltip="Settings"
+            mat-icon-button
+            (click)="toggleRightSidebar()"
+            class="nav-notification-icons"
+          >
+            <mat-icon>tune</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

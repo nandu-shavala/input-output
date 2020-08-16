@@ -1,0 +1,31 @@
+
+.bgg{
+    padding: 0px;
+    height: 100%;
+    background: rgba(0, 123, 255, 0.2196078431372549);
+}
+.cardbox{
+    padding: 0px;
+        border-radius: 10px;
+        background: white;
+        overflow: hidden;
+}
+.titl{
+    color: #511593;
+    font-size: 34px;
+    text-align: left;
+    padding: 30px 30px 0px;
+    font-weight: 600;
+        
+}
+@media(max-width:768px){
+.bgg{
+    height:auto
+}
+.nopad{
+    padding:0px
+}
+.nomar{
+    margin:0px
+}
+}

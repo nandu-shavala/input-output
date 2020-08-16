@@ -1,0 +1,369 @@
+<section class="card padding-20 m-t-20" *ngIf="vehicleStats != null">
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="b m-b-5 tcolor">Speed Summary</h5>
+      <div>
+        <div class="impact bh1 padding-10 borderr">
+          <div class="row mob text-center">
+            <div class="col-md-4 border-right">
+              <h5 class="tcolor">Over speed</h5>
+              <div>
+                <img
+                  src="assets/images/icon/hspeed.png"
+                  style="height: 50px;"
+                />
+              </div>
+              <table style="text-align: center; width: 100%;">
+                <tr>
+                  <td>
+                    <h1 class="b">
+                      <span class="tcolor">5</span>
+                    </h1>
+                    <div class="greycl">
+                      {{ vehicleStats?.NumberofOverSpeedingVehicles }}
+                    </div>
+                    <p class="m-t-0 p-t-5 m-b-0 tcolor">
+                      Number of Over Speeding Vehicles
+                    </p>
+                  </td>
+                  <td>
+                    <h1 class="b">
+                      <span class="tcolor">{{
+                        vehicleStats?.AvgDistanceCoveredwithOverspeed
+                      }}</span>
+                    </h1>
+                    <div class="greycl">(5439)</div>
+                    <p class="m-t-0 p-t-5 m-b-0 tcolor">
+                      Avg. Distance Covered with Over speed
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="col-md-4 border-right">
+              <h5 class="tcolor">Normal speed</h5>
+              <div>
+                <img
+                  src="assets/images/icon/nspeed.png"
+                  style="height: 50px;"
+                />
+              </div>
+              <h1 class="b">
+                <span class="tcolor">{{
+                  vehicleStats?.NumberofVehiclesrunningincorrectspeed
+                }}</span>
+              </h1>
+              <div class="greycl">(92.2%)</div>
+              <p class="m-t-0 p-t-5 m-b-0 tcolor">
+                Number of Vehicles running in correct speed
+              </p>
+            </div>
+            <div class="col-md-4">
+              <h5 class="tcolor">Low speed</h5>
+              <div>
+                <img
+                  src="assets/images/icon/lspeed.png"
+                  style="height: 50px;"
+                />
+              </div>
+              <h1 class="b">
+                <span class="tcolor">{{
+                  vehicleStats?.NumberofVehiclesrunninginlowerspeed
+                }}</span>
+              </h1>
+              <div class="greycl">(2.2%)</div>
+              <p class="m-t-0 p-t-5 m-b-0 tcolor">
+                Number of Vehicles running in lower speed
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card padding-20">
+  <div class="row">
+    <div class="col-md-6" *ngIf="overSpeedVehicle">
+      <h5 class="b m-b-5 tcolor">
+        Over Speed Diagnostics
+      </h5>
+      <div>
+        <div class="col-md-12 padding-0 m-t-30">
+          <table class="table tcolor noborder">
+            <tr *ngFor="let reason of overSpeedVehicle">
+              <td
+                style="
+                  text-align: right;
+                  width: 120px;
+                  padding-right: 10px;
+                  font-weight: 500;
+                "
+              >
+                {{ reason?.TyeofIssue }}
+              </td>
+              <td>
+                <div class="barsscont">
+                  <table style="width: 100%;">
+                    <Tr>
+                      <Td style="padding-right: 10px;">
+                        <div class="bars_border" width="100%">
+                          <div
+                            class="barss"
+                            [style]="
+                              'width: ' + calcPercentWidth(reason.IssuePercent)
+                            "
+                          ></div>
+
+                          <div class="iicony">
+                            <img [src]="getImgPathForOSD(reason.TyeofIssue)" />
+                          </div>
+                        </div>
+                      </Td>
+                      <Td style="width: 40px; text-align: center;">
+                        <b>
+                          {{ reason?.VehicleQuantity }}
+                        </b>
+                      </Td>
+                      <td style="width: 46px;">
+                        <app-progress
+                          style="margin-top: -1px; display: inline-block;"
+                          [value]="reason?.IssuePercent"
+                        ></app-progress>
+                      </td>
+                    </Tr>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6" *ngIf="vehicleStats != null">
+      <h5 class="b m-b-5 tcolor">
+        Potential Impact – Over Speed
+      </h5>
+      <div class="gradient">
+        <div class="impact padding-10 borderr tcolor">
+          <div class="row mob text-center">
+            <div class="col-md-4">
+              <div class="m-t-15">
+                <img src="assets/images/icon/alert.png" style="height: 43px;" />
+              </div>
+              <h1 class="b">
+                <span
+                  >{{ vehicleStats?.potentialfailureratebyendoftest }}%</span
+                >
+              </h1>
+
+              <p class="m-t-0 p-t-5 m-b-0">
+                Potential Failure&nbsp;Rate by End of Test
+              </p>
+            </div>
+            <div class="col-md-4">
+              <div class="m-t-15">
+                <img src="assets/images/icon/cost.png" style="height: 43px;" />
+              </div>
+              <h1 class="b">
+                <span>{{ vehicleStats?.costofrework }} crore</span>
+              </h1>
+
+              <p class="m-t-0 p-t-5 m-b-0">
+                Cost of Rework
+              </p>
+            </div>
+            <div class="col-md-4">
+              <div class="m-t-15">
+                <img src="assets/images/icon/cost.png" style="height: 43px;" />
+              </div>
+              <h1 class="b">
+                <span>{{ vehicleStats?.Costofdelay }} crore</span>
+              </h1>
+
+              <p class="m-t-0 p-t-5 m-b-0">Cost of Delay</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card padding-20">
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <div class="ngxTableHeader">
+          <h5 class="b m-b-5 tcolor">
+            Actions for Abnormal Speeding Vehicle
+          </h5>
+          <ul class="header-buttons">
+            <li class="dropdown m-l-20">
+              <div class="unisearch" style="display: flex;">
+                <label for="search-input"
+                  ><i class="material-icons search-icon">search</i></label
+                >
+                <input
+                  placeholder="Search"
+                  type="text"
+                  [(ngModel)]="textValue1"
+                  class="browser-default search-field"
+                  (keyup)="filterDatatable($event)"
+                  aria-label="Search box"
+                />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-12 padding-0 table-responsive">
+          <ngx-datatable
+            #table
+            class="material"
+            [rows]="speedData"
+            [scrollbarH]="true"
+            [sortType]="'multi'"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="'60'"
+            [limit]="appConstants.GRID_PAGE_LIMIT"
+            (sort)="speedonSort($event)"
+            (select)="speedonSelect($event)"
+          >
+            <ngx-datatable-column
+              name="Issue Category"
+              prop="Issuecategory"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.Issuecategory }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column
+              name="Chassis No"
+              prop="chassisino"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.chassisino }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column
+              name="Driver Details"
+              prop="driverdetails"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.driverdetails }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column
+              name="Driving Experience"
+              prop="Drivingexperience"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.Drivingexperience }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column
+              name="Contact Number"
+              prop="Contactno"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.Contactno }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Action" prop="ActionName" [width]="130">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.ActionName }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column
+              name="Target Date"
+              prop="targetdate"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.targetdate }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column
+              name="Responsibility"
+              prop="ActionName"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <div style="display: flex;">
+                  <div
+                    class="imgcircle"
+                    [style]="getImage(row.responsibility)"
+                  ></div>
+                  <span
+                    style="
+                      display: inline-block;
+                      margin-top: 2px;
+                      margin-left: 5px;
+                    "
+                    >{{ row.responsibility }}</span
+                  >
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column
+              name="Current Status"
+              prop="currentstatus"
+              [width]="130"
+            >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                <span [class]="getStatusStyle(row.currentstatus)">{{
+                  row.currentstatus
+                }}</span>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-footer>
+              <ng-template
+                let-rowCount="rowCount"
+                let-pageSize="pageSize"
+                let-selectedCount="selectedCount"
+                let-curPage="curPage"
+                let-offset="offset"
+                ngx-datatable-footer-template
+              >
+                <div class="page-count">
+                  Total Records {{ speedTotalCount }}
+                </div>
+                <datatable-pager
+                  [pagerLeftArrowIcon]="'datatable-icon-left'"
+                  [pagerRightArrowIcon]="'datatable-icon-right'"
+                  [pagerPreviousIcon]="'datatable-icon-prev'"
+                  [pagerNextIcon]="'datatable-icon-skip'"
+                  [page]="CurrentPage"
+                  [size]="appConstants.GRID_PAGE_LIMIT"
+                  [count]="speedTotalCount"
+                  [hidden]="
+                    !(speedTotalCount / appConstants.GRID_PAGE_LIMIT > 1)
+                  "
+                  (change)="speedonFooterPage($event)"
+                >
+                </datatable-pager>
+              </ng-template>
+            </ngx-datatable-footer>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

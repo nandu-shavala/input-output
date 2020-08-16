@@ -1,0 +1,117 @@
+
+.card-box {
+    padding: 17px 10px;
+    color: #212529;
+    background-color: #ffffff;
+    margin: 8px 0px 25px 0px;
+    border-radius: 10px;
+    min-height: inherit;
+    position: relative;
+    cursor: pointer;
+    transition: all ease 0.2s;
+
+    &:hover{
+        transition: all ease 0.2s;
+    transform: scale(1.03);
+    }
+    .icon{
+        transition: all ease 0.3s;
+
+    }
+    h5 {
+        text-align: left;
+        padding-left: 104px;
+        text-transform: capitalize;
+    }
+
+    &:hover .icon {
+        transform: scale(1.03);
+        transition: all ease 0.3s;
+    }
+}
+
+.icon {
+    border-radius: 10px;
+    width: 73px;
+    height: 73px;
+    overflow: hidden;
+    position: absolute;
+    background: #e4e4e4;
+    margin: auto;
+    left: 9px;
+    display: inline-block;
+    /* float: left; */
+    margin-top: -28px;
+    margin-left: 2px;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.0588235);
+    img {
+       // height: 16px;
+        width: auto;
+       
+    }
+}
+
+
+.card-box:before {
+    position: absolute;
+    right: 0px;
+    content: '';
+   
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    transition: all ease 0.3s;
+    opacity:0.6;
+  
+}
+
+ul.switchview {
+    list-style: none;
+    display: inline-block;  
+    margin-top: 5px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    li {
+        display: inline-block;
+
+       
+  a {
+    padding: 10px;
+    background: #f3f3f3;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    padding-top: 6px;
+    margin: 2px;
+    transition: all ease 0.2s;
+    cursor: pointer;
+    img {height: 15px;}
+
+    &.active{
+        
+            background: #565656;
+            img {
+                filter: invert(1);
+            }
+     
+    }
+    &:hover {
+        background: #dadada;
+        transition: all ease 0.2s;
+        img {
+            filter: invert(0);
+        }
+    }
+  
+}
+
+    }
+}
+
+
+

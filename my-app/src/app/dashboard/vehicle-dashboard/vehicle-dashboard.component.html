@@ -1,0 +1,933 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Durability Test</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/dashboard/main"> Home</a>
+            </li>
+            <li class="breadcrumb-item active">
+              <a routerLink="/dashboard/main"> Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard/validation-types/{{ program?.id }}">
+                {{ program?.vehicleProgramName }}</a
+              >
+            </li>
+            <li class="breadcrumb-item active">
+              <a
+                routerLink="/dashboard/durability/{{ program?.id }}/{{
+                  test?.id
+                }}"
+                >{{ test?.testName }}</a
+              >
+            </li>
+            <li class="breadcrumb-item">
+              {{ vehicleFailure?.failureComponent }} Failure
+              {{ vehicleFailure?.ChassisNo }}
+            </li>
+          </ul>
+          <div *ngIf="!pdfLoading; else spinner">
+            <div class="btnright">
+              <button
+                mat-icon-button
+                style="padding: 0px 7px;"
+                (click)="captureScreen('vehicle_dashboard')"
+                title="Export as PDF"
+              >
+                <img style="height: 22px;" src="assets/images/icon/pdf.png" />
+              </button>
+            </div>
+          </div>
+          <ng-template #spinner
+            ><div class="btnright" style="padding: 0px 7px;">
+              <mat-spinner diameter="22"></mat-spinner></div
+          ></ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="contentToConvert">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card nobg s-m-10">
+          <div class="body">
+            <h5 class="b m-t-0 m-b-10 tcolor">
+              On-Road Test - Root Cause Analytics
+            </h5>
+            <section
+              class="card margin-0 padding-20"
+              style="margin-bottom: 0px;"
+            >
+              <div class="row margin-0">
+                <div class="impact padding-30 col-md-12 m-b-0">
+                  <div class="row text-center small mob">
+                    <div class="col-md-3">
+                      <div>
+                        <img
+                          [src]="program?.programImage"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <div class="darkgreycl p-t-20">
+                        <div>
+                          {{
+                            vehicleFailure?.vehicleProgramName ||
+                              nullPlaceholder
+                          }}
+                        </div>
+                        <div>
+                          Chassis No:
+                          {{ vehicleFailure?.ChassisNo || nullPlaceholder }}
+                        </div>
+                        <!-- <div>{{ vehicleFailure?.failurereported }}</div> -->
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div>
+                        <img
+                          src="assets/images/icon/speed.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <div class="darkgreycl p-t-20">
+                        <div>
+                          Total Distance Run:
+                          {{
+                            vehicleFailure?.totaldistancerun || nullPlaceholder
+                          }}
+                          Kms.
+                        </div>
+                        <div>
+                          Avg. Distance Per Day:
+                          {{
+                            vehicleFailure?.avgdistanceperday || nullPlaceholder
+                          }}
+                          Kms.
+                        </div>
+                        <!-- <div>Driver: {{ vehicleFailure?.driverName }}</div> -->
+                        <!-- <div>@ {{ vehicleFailure?.currentlocation }}</div> -->
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div>
+                        <img
+                          src="assets/images/icon/calendar.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <div class="darkgreycl p-t-20">
+                        <!-- <div>
+                          Warranty Date: {{ vehicleFailure?.warrantrydate }}
+                        </div> -->
+                        <div>
+                          Test Start Date:
+                          {{
+                            vehicleFailure?.plannedTestStartDate ||
+                              nullPlaceholder
+                          }}
+                        </div>
+                        <div>
+                          Failure Reported On:
+                          {{
+                            vehicleFailure?.failurereported || nullPlaceholder
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div>
+                        <img
+                          src="assets/images/icon/service.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <div class="darkgreycl p-t-20">
+                        <div>
+                          Service Engineer Name:
+                          {{
+                            vehicleFailure?.serviceengrname || nullPlaceholder
+                          }}
+                        </div>
+                        <div>
+                          Service centre Name:
+                          {{
+                            vehicleFailure?.serviceengrcenter || nullPlaceholder
+                          }}
+                        </div>
+                        <div>
+                          Service Centre Location:
+                          {{
+                            vehicleFailure?.servicecenterlocation ||
+                              nullPlaceholder
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class=" padding-10 col-md-12 bgg tcolor">
+                           <div class="padding-20">
+                              <h4>Open Failures</h4>
+                              <mat-radio-group aria-label="Select an option">
+                                 <mat-radio-button value="1">Starter Not working</mat-radio-button>
+                                 <mat-radio-button value="2">Head Lamp Failure</mat-radio-button>
+                              </mat-radio-group>
+                           </div>
+                        </div> -->
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="card nobg s-m-10">
+          <div class="body">
+            <section class="card margin-0 padding-0">
+              <div class="row margin-0 padding-20">
+                <div class="impact gradient padding-30 col-md-12">
+                  <div class="row text-center mob">
+                    <div class="col-md-2 border-right">
+                      <div>
+                        <img
+                          [src]="
+                            vehicleFailure?.failureimage ||
+                            'assets/images/icon/not-found.png'
+                          "
+                          style="height: 50px; padding: 4px;"
+                        />
+                      </div>
+                      <h1 class="b tcolor">
+                        <span>{{
+                          vehicleFailure?.failureComponent || nullPlaceholder
+                        }}</span>
+                      </h1>
+                      <div class="darkgreycl">
+                        <div>
+                          {{
+                            vehicleFailure?.failurecomonentname ||
+                              nullPlaceholder
+                          }}
+                        </div>
+                        <div>
+                          {{
+                            vehicleFailure?.failurecomonentmfg ||
+                              nullPlaceholder
+                          }}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2 border-right">
+                      <div>
+                        <img
+                          src="assets/images/icon/start.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <h1 class="b tcolor">
+                        <span>{{
+                          vehicleFailure?.noofstartsmadesofar || nullPlaceholder
+                        }}</span>
+                      </h1>
+                      <div class="darkgreycl">
+                        <div>Number of Starts made so far</div>
+                      </div>
+                    </div>
+                    <div class="col-md-2 border-right">
+                      <div>
+                        <img
+                          src="assets/images/icon/calendar.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <h1 class="b tcolor">
+                        <span>{{
+                          vehicleFailure?.dayssincelastfailure ||
+                            nullPlaceholder
+                        }}</span>
+                      </h1>
+                      <div class="darkgreycl">
+                        <div>Days past since last Failure</div>
+                      </div>
+                    </div>
+                    <div class="col-md-2 border-right">
+                      <div>
+                        <img
+                          src="assets/images/icon/time.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <h1 class="b tcolor">
+                        <span>{{
+                          vehicleFailure?.mtbfdays || nullPlaceholder
+                        }}</span>
+                      </h1>
+                      <div class="greycl">
+                        <div>STD AVG - 53</div>
+                      </div>
+                      <div class="darkgreycl">
+                        <div>MTBF in Days</div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div>
+                        <img
+                          src="assets/images/icon/mttr.png"
+                          style="height: 50px;"
+                        />
+                      </div>
+                      <h1 class="b tcolor">
+                        <span>{{
+                          vehicleFailure?.mtbfhours || nullPlaceholder
+                        }}</span>
+                      </h1>
+                      <div class="greycl">
+                        <div>STD AVG - 3</div>
+                      </div>
+                      <div class="darkgreycl">
+                        <div>MTTR in Hours</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="card m-t-20 padding-0">
+              <div class="col-md-12">
+                <div class="p-t-20 p-b-20 p-l-10 p-r-10">
+                  <h5 class="b m-t-0 m-b-15 tcolor">Sub System Performance</h5>
+                  <div>
+                    <div class="row">
+                      <div style="margin-top: -12px;">
+                        <div class="col-md-7 padding-0 filterdiv">
+                          <button
+                            (click)="openDialog()"
+                            class="graphbtn"
+                            mat-raised-button
+                            color="light"
+                            style="padding: 0px 10px;"
+                          >
+                            Graph Parameters
+                          </button>
+                          <div
+                            class="filterr tcolor"
+                            *ngIf="showDateRange == true"
+                          >
+                            <div class="row">
+                              <div class="m-b-0 m-r-8">
+                                Start Date
+                                <mat-form-field class="m-r-0">
+                                  <input
+                                    matInput
+                                    readonly
+                                    [matDatepicker]="startDate"
+                                    [(ngModel)]="startDateVal"
+                                  />
+                                  <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="startDate"
+                                  >
+                                  </mat-datepicker-toggle>
+                                  <mat-datepicker #startDate></mat-datepicker>
+                                </mat-form-field>
+                              </div>
+                              <div class="m-b-0">
+                                End Date
+                                <mat-form-field>
+                                  <input
+                                    matInput
+                                    readonly
+                                    [matDatepicker]="endDate"
+                                    [(ngModel)]="endDateVal"
+                                  />
+                                  <mat-datepicker-toggle
+                                    matSuffix
+                                    [for]="endDate"
+                                  >
+                                  </mat-datepicker-toggle>
+                                  <mat-datepicker #endDate></mat-datepicker>
+                                </mat-form-field>
+                              </div>
+                              <button
+                                (click)="subSystemPerfFilter()"
+                                mat-raised-button
+                                color="primary"
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <mat-tab-group
+                          animationDuration="0ms"
+                          (selectedIndexChange)="selectedIndexChange($event)"
+                        >
+                          <mat-tab label="All Period" class="padding-0">
+                          </mat-tab>
+                          <mat-tab label="Last week"> </mat-tab>
+                          <mat-tab label="Last Month"> </mat-tab>
+                          <mat-tab label="Date Range"> </mat-tab>
+                        </mat-tab-group>
+                        <div *ngIf="commonParams.length > 0">
+                          <div class="p-t-0">
+                            <div class="col-md-12 padding-0 table-responsive">
+                              <table
+                                class="table table-striped table-smm tcolor"
+                              >
+                                <tr>
+                                  <th></th>
+                                  <th>Parameters</th>
+                                  <th>Specification Limit</th>
+                                  <th>Lowest Value</th>
+                                  <th>Peak Value</th>
+                                  <th>No. of times Below LCL</th>
+                                  <th>No. of times Within Spec</th>
+                                  <th>No. of times Above UCL</th>
+                                  <th>
+                                    Initial Performance
+                                  </th>
+                                  <th>Final Performance</th>
+                                  <th>% Deviation from Specification</th>
+                                  <th>% Deviation from STD Average</th>
+                                </tr>
+                                <tr *ngFor="let param of selectedParamGroup">
+                                  <!-- <td
+                                    [attr.rowspan]="param.count"
+                                    *ngIf="param.index == 0"
+                                  >
+                                    <div class="rotatelabel">
+                                      {{ param.type }}
+                                    </div>
+                                  </td> -->
+                                  <td>
+                                    <span
+                                      [class]="
+                                        param.type == 'Input'
+                                          ? 'label shadow-style text-black bg-light-blue'
+                                          : 'label shadow-style text-black bg-dark-blue'
+                                      "
+                                      >{{ param.type }}</span
+                                    >
+                                  </td>
+                                  <td>
+                                    <div class="text-left">
+                                      <table class="nob">
+                                        <tr>
+                                          <Td
+                                            ><img
+                                              src="assets/images/icon/volt.png "
+                                          /></Td>
+                                          <Td>
+                                            <h6 class="headlabel">
+                                              {{ param.parameter }}
+                                            </h6>
+                                            <small> {{ param.unit }} </small>
+                                          </Td>
+                                        </tr>
+                                      </table>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="greycl">
+                                      {{
+                                        gridValues[param.parameter].specLimit
+                                      }}
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div
+                                      (click)="
+                                        navToChart(
+                                          param.parameter,
+                                          gridValues[param.parameter]
+                                            .lowestValue
+                                        )
+                                      "
+                                      [class]="
+                                        gridValues[param.parameter].lowestValue
+                                          .hasPoint
+                                          ? 'redcl'
+                                          : ''
+                                      "
+                                    >
+                                      {{
+                                        gridValues[param.parameter].lowestValue
+                                          ?.value
+                                      }}
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div
+                                      style="padding-left: 3px;"
+                                      (click)="
+                                        navToChart(
+                                          param.parameter,
+                                          gridValues[param.parameter].peakValue
+                                        )
+                                      "
+                                      [class]="
+                                        gridValues[param.parameter].peakValue
+                                          .hasPoint
+                                          ? 'redcl'
+                                          : ''
+                                      "
+                                    >
+                                      {{
+                                        gridValues[param.parameter].peakValue
+                                          ?.value
+                                      }}
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div
+                                      [class]="
+                                        belowLCL(param.parameter) > 0
+                                          ? 'redcl'
+                                          : ''
+                                      "
+                                    >
+                                      {{ gridValues[param.parameter].belowLCL }}
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div>
+                                      {{
+                                        gridValues[param.parameter].withinSpec
+                                      }}
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div
+                                      [class]="
+                                        aboveUCL(param.parameter) > 0
+                                          ? 'redcl'
+                                          : ''
+                                      "
+                                    >
+                                      {{ gridValues[param.parameter].aboveUCL }}
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div
+                                      (click)="
+                                        navToChart(
+                                          param.parameter,
+                                          gridValues[param.parameter]
+                                            .initialPerformance
+                                        )
+                                      "
+                                      [class]="
+                                        gridValues[param.parameter]
+                                          .initialPerformance.hasPoint
+                                          ? 'redcl'
+                                          : ''
+                                      "
+                                    >
+                                      {{
+                                        gridValues[param.parameter]
+                                          .initialPerformance?.value
+                                      }}
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div
+                                      (click)="
+                                        navToChart(
+                                          param.parameter,
+                                          gridValues[param.parameter]
+                                            .finalPerformance
+                                        )
+                                      "
+                                      [class]="
+                                        gridValues[param.parameter]
+                                          .finalPerformance.hasPoint
+                                          ? 'redcl'
+                                          : ''
+                                      "
+                                    >
+                                      {{
+                                        gridValues[param.parameter]
+                                          .finalPerformance?.value
+                                      }}
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div>
+                                      {{
+                                        gridValues[param.parameter]
+                                          .deviationFromSpecification
+                                      }}%
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div>
+                                      {{
+                                        gridValues[param.parameter]
+                                          .deviationFromStdAvg
+                                      }}%
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
+
+                          <div
+                            class="p-t-0 stackedch"
+                            *ngIf="subSystemPerformance != null"
+                          >
+                            <div
+                              class="col-md-12 padding-0 table-responsive"
+                              style="overflow-y: hidden;"
+                              *ngIf="commonParams.length > 0"
+                            >
+                              <table class="table table-smm tcolor">
+                                <tr>
+                                  <th></th>
+                                  <!-- <th>Parameters</th> -->
+                                  <th
+                                    style="
+                                      width: 550px;
+                                      padding: 0px;
+                                      font-size: 14px;
+                                    "
+                                  >
+                                    Graph
+                                  </th>
+                                  <th>Selected Value & Deviations</th>
+                                </tr>
+                                <tr *ngFor="let param of selectedParamGroup">
+                                  <td>
+                                    <div class="m-b-10">
+                                      <img src="assets/images/icon/volt.png " />
+                                    </div>
+                                    <span
+                                      [class]="
+                                        param.type == 'Input'
+                                          ? 'label shadow-style text-black bg-blue'
+                                          : 'label shadow-style text-black bg-dark-blue'
+                                      "
+                                      >{{ param.type }}</span
+                                    >
+                                  </td>
+                                  <!-- <td>
+                                    <div class="text-left">
+                                      <table class="nob">
+                                        <tr>
+                                          <Td class="text-center">
+                                            <div class="m-b-10">
+                                              <img
+                                                src="assets/images/icon/volt.png "
+                                              />
+                                            </div>
+                                            <h6 class="headlabel">
+                                              {{ param.parameter }}
+                                            </h6>
+                                            <small> {{ param.unit }} </small>
+                                          </Td>
+                                        </tr>
+                                      </table>
+                                    </div>
+                                  </td> -->
+                                  <td style="width: 550px; padding: 0px;">
+                                    <div
+                                      class="min_wid_300"
+                                      [id]="getParamCol(param.parameter)"
+                                    >
+                                      <apx-chart
+                                        #apxchart
+                                        [series]="param.chartOptions?.series"
+                                        [chart]="param.chartOptions?.chart"
+                                        [colors]="param.chartOptions?.colors"
+                                        [yaxis]="param.chartOptions?.yaxis"
+                                        [dataLabels]="commonOptions.dataLabels"
+                                        [markers]="commonOptions.markers"
+                                        [stroke]="commonOptions.stroke"
+                                        [grid]="commonOptions.grid"
+                                        [xaxis]="param.chartOptions?.xaxis"
+                                        [tooltip]="commonOptions.tooltip"
+                                        [fill]="param.chartOptions?.fill"
+                                        [annotations]="
+                                          param.chartOptions?.annotations
+                                        "
+                                      ></apx-chart>
+                                    </div>
+                                  </td>
+
+                                  <td
+                                    style="
+                                      height: 280px !important;
+                                      width: 300px !important;
+                                    "
+                                  >
+                                    <div
+                                      class="param_det"
+                                      *ngIf="
+                                        chartValues &&
+                                        chartValues['activeParam'] ==
+                                          getParamCol(param.parameter)
+                                      "
+                                    >
+                                      <table cellapdding="0" cellspacing="0">
+                                        <thead>
+                                          <tr>
+                                            <th>Parameters</th>
+                                            <th>Selected Value</th>
+                                            <th>% Deviation from Spec</th>
+                                            <th>% Deviation from Std Avg</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr class="bg-gray">
+                                            <td>Date</td>
+                                            <td colspan="3">
+                                              {{ chartValues["TimeStamp"] }}
+                                            </td>
+                                          </tr>
+                                          <ng-container
+                                            *ngFor="
+                                              let param of selectedParamGroup
+                                            "
+                                          >
+                                            <tr
+                                              [class]="
+                                                param.type == 'Input'
+                                                  ? 'bg-blue'
+                                                  : 'bg-dark-blue'
+                                              "
+                                            >
+                                              <td>{{ param.parameter }}</td>
+                                              <td>
+                                                {{
+                                                  chartValues[
+                                                    getParamCol(param.parameter)
+                                                  ].actualValue
+                                                }}
+                                              </td>
+                                              <td>
+                                                {{
+                                                  chartValues[
+                                                    getParamCol(param.parameter)
+                                                  ].deviationFromSpec + "%"
+                                                }}
+                                              </td>
+                                              <td>
+                                                {{
+                                                  chartValues[
+                                                    getParamCol(param.parameter)
+                                                  ].deviationFromStdAvg + "%"
+                                                }}
+                                              </td>
+                                            </tr>
+                                          </ng-container>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section class="card padding-20">
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- <h5 class="b m-t-20 m-b-5 tcolor">Action to be taken</h5> -->
+                  <div>
+                    <div class="ngxTableHeader">
+                      <ul class="header-buttons-left ml-0">
+                        <li class="dropdown">
+                          <h5 class="b m-b-5 tcolor">
+                            Action to be taken
+                          </h5>
+                        </li>
+                      </ul>
+
+                      <ul class="header-buttons m-r-20">
+                        <li class="dropdown m-l-20">
+                          <label for="search-input"
+                            ><i class="material-icons search-icon"
+                              >search</i
+                            ></label
+                          >
+                          <input
+                            placeholder="Search"
+                            type="text"
+                            [(ngModel)]="textValue"
+                            class="browser-default search-field"
+                            (keyup)="overallSearch($event)"
+                          />
+                        </li>
+                      </ul>
+                    </div>
+                    <div
+                      class="col-md-12 padding-0 table-responsive stacked m-b-0"
+                    >
+                      <ngx-datatable
+                        #table
+                        class="material"
+                        [rows]="vehicleActions"
+                        [scrollbarH]="true"
+                        [sortType]="'multi'"
+                        [columnMode]="'force'"
+                        [headerHeight]="50"
+                        [footerHeight]="50"
+                        [rowHeight]="'60'"
+                        [limit]="appConstants.GRID_PAGE_LIMIT"
+                        (sort)="vehicle_onSort($event)"
+                        (select)="vehicle_onSelect($event)"
+                      >
+                        <!-- user image  [limit]="10"  (sort)="onSort($event)"  -->
+
+                        <ngx-datatable-column
+                          name="Chassis No"
+                          prop="chassisno"
+                          [width]="130"
+                        >
+                          <ng-template
+                            let-row="row"
+                            ngx-datatable-cell-template
+                          >
+                            {{ row.chassisno }}
+                          </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column
+                          name="Issue Category"
+                          prop="issuecategory"
+                          [width]="130"
+                        >
+                          <ng-template
+                            let-row="row"
+                            ngx-datatable-cell-template
+                          >
+                            {{ row.issuecategory }}
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column
+                          name="Action"
+                          prop="action"
+                          [width]="500"
+                        >
+                          <ng-template
+                            let-row="row"
+                            ngx-datatable-cell-template
+                          >
+                            {{ row.action }}
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column
+                          name="Target Date"
+                          prop="target"
+                          [width]="130"
+                        >
+                          <ng-template
+                            let-row="row"
+                            ngx-datatable-cell-template
+                          >
+                            {{ row.target }}
+                          </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column
+                          name="Responsibility"
+                          prop="responsibilty"
+                          [width]="130"
+                        >
+                          <ng-template
+                            let-row="row"
+                            ngx-datatable-cell-template
+                          >
+                            <div style="display: flex;">
+                              <div
+                                class="imgcircle"
+                                [style]="getImage(row.responsibilty)"
+                              ></div>
+                              <span
+                                style="display: inline-block; margin-top: 3px;"
+                                >{{ row.responsibilty }}</span
+                              >
+                            </div>
+                          </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column
+                          name="Service Centre"
+                          prop="servicecentername"
+                          [width]="130"
+                        >
+                          <ng-template
+                            let-row="row"
+                            ngx-datatable-cell-template
+                          >
+                            {{ row.servicecentername }}
+                          </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-column
+                          name="Current Status"
+                          prop="currentstatus"
+                          [width]="130"
+                        >
+                          <ng-template
+                            let-row="row"
+                            ngx-datatable-cell-template
+                          >
+                            <span [class]="getStatusStyle(row.currentstatus)">{{
+                              row.currentstatus
+                            }}</span>
+                          </ng-template>
+                        </ngx-datatable-column>
+
+                        <ngx-datatable-footer>
+                          <ng-template
+                            let-rowCount="rowCount"
+                            let-pageSize="pageSize"
+                            let-selectedCount="selectedCount"
+                            let-curPage="curPage"
+                            let-offset="offset"
+                            ngx-datatable-footer-template
+                          >
+                            <div class="page-count">
+                              Total Records {{ vehicleTotalCount }}
+                            </div>
+                            <datatable-pager
+                              [pagerLeftArrowIcon]="'datatable-icon-left'"
+                              [pagerRightArrowIcon]="'datatable-icon-right'"
+                              [pagerPreviousIcon]="'datatable-icon-prev'"
+                              [pagerNextIcon]="'datatable-icon-skip'"
+                              [page]="CurrentPage"
+                              [size]="appConstants.GRID_PAGE_LIMIT"
+                              [count]="vehicleTotalCount"
+                              [hidden]="
+                                !(
+                                  vehicleTotalCount /
+                                    appConstants.GRID_PAGE_LIMIT >
+                                  1
+                                )
+                              "
+                              (change)="Failure_onFooterPage($event)"
+                            >
+                            </datatable-pager>
+                          </ng-template>
+                        </ngx-datatable-footer>
+                      </ngx-datatable>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

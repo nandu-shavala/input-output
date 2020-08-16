@@ -1,0 +1,511 @@
+<section class="content">
+  <div class="container-fluid">
+    <!-- Basic Examples -->
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Relationship Matrix</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              Settings
+            </li>
+            <li class="breadcrumb-item">
+              <a routerLink="/settings/manage-vehicle"> Manage Vehicle</a>
+            </li>
+            <li class="breadcrumb-item active">Assign Test</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="test row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card card-box s-m-10">
+          <h5 _ngcontent-trs-c309="" class="b m-t-10 m-l-15 m-b-0 tcolor">
+            Traceability Matrix
+          </h5>
+          <div class="body">
+            <div class="col-sm-12" style="margin-bottom: 10px;">
+              <div class="filterheaderrow">
+                <div class="p-t-30" style="margin-bottom: 0px;">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <mat-form-field>
+                        <!-- <mat-label>Source Type</mat-label> -->
+                        <input
+                          placeholder="Source Type"
+                          matInput
+                          [(ngModel)]="sourceType"
+                          (ngModelChange)="doSourceTypeFilter()"
+                          [matAutocomplete]="acSourceType"
+                          (blur)="onSourceTypeBlur()"
+                          type="text"
+                        />
+                        <mat-icon class="icon-suffix" matSuffix
+                          >keyboard_arrow_down</mat-icon
+                        >
+                        <mat-autocomplete
+                          #acSourceType
+                          (optionSelected)="onSourceTypeChange()"
+                        >
+                          <mat-option
+                            *ngFor="let sourcetype of filteredSource"
+                            [value]="sourcetype"
+                          >
+                            {{ sourcetype }}
+                          </mat-option>
+                        </mat-autocomplete>
+                        <!-- <mat-select
+                            [(ngModel)]="sourcetypelist"
+                            (ngModelChange)="onsourcetype()"
+                          >
+                            <mat-option
+                              *ngFor="let sourcetype of sourceType"
+                              [value]="sourcetype"
+                            >
+                              {{ sourcetype }}
+                            </mat-option>
+                          </mat-select> -->
+                        <!-- <mat-hint>(ngModelChange) event</mat-hint> -->
+                      </mat-form-field>
+                      <div class="pt-5 pad_top_sm">
+                        <mat-form-field>
+                          <input
+                            placeholder="Source Object Name"
+                            matInput
+                            [(ngModel)]="sourceSearchText"
+                            [matAutocomplete]="acSourceObjectName"
+                            (ngModelChange)="doSourceObjectNameFilter()"
+                            type="text"
+                            autocomplete="off"
+                          />
+                          <mat-icon class="icon-suffix" matSuffix
+                            >keyboard_arrow_down</mat-icon
+                          >
+
+                          <mat-autocomplete #acSourceObjectName>
+                            <mat-option
+                              *ngFor="
+                                let SourceObjectName of filteredSourceObjectName
+                              "
+                              [value]="SourceObjectName"
+                            >
+                              {{ SourceObjectName }}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-md-3 pad_top_sm">
+                      <mat-form-field>
+                        <!-- <mat-label>Target Type</mat-label> -->
+                        <input
+                          placeholder="Target Type"
+                          matInput
+                          [matAutocomplete]="acTargetType"
+                          [(ngModel)]="targetType"
+                          (ngModelChange)="doTargetTypeFilter()"
+                          (blur)="onTargetTypeBlur()"
+                          type="text"
+                        />
+                        <mat-icon class="icon-suffix" matSuffix
+                          >keyboard_arrow_down</mat-icon
+                        >
+                        <mat-autocomplete
+                          #acTargetType
+                          (optionSelected)="ontargetTypeChange()"
+                        >
+                          <mat-option
+                            *ngFor="let targettype of filteredTarget"
+                            [value]="targettype"
+                          >
+                            {{ targettype }}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                      <div class="pt-5">
+                        <mat-form-field>
+                          <input
+                            placeholder="Target Object Name"
+                            matInput
+                            [(ngModel)]="targetSearchText"
+                            [matAutocomplete]="acTargetObjectName"
+                            (ngModelChange)="doTargetObjectNameFilter()"
+                            type="text"
+                            autocomplete="off"
+                          />
+
+                          <mat-icon class="icon-suffix" matSuffix
+                            >keyboard_arrow_down</mat-icon
+                          >
+
+                          <mat-autocomplete #acTargetObjectName>
+                            <mat-option
+                              *ngFor="
+                                let TargetObjectName of filteredTargetObjectName
+                              "
+                              [value]="TargetObjectName"
+                            >
+                              {{ TargetObjectName }}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="col-md-2 rela_padd">
+                      <!-- <mat-checkbox
+                        (change)="onFilterCheckBoxClick()"
+                        [checked]="rowFilter"
+                        >Hide empty relations
+                      </mat-checkbox> -->
+                      <!-- <div class="pt-5"> -->
+                      <mat-form-field>
+                        <input
+                          placeholder="Relationship"
+                          matInput
+                          [(ngModel)]="relationshiplist"
+                          (ngModelChange)="doRelationshipFilter()"
+                          [matAutocomplete]="acRelationship"
+                          (blur)="onRelationshipBlur()"
+                          type="text"
+                        />
+                        <mat-icon class="icon-suffix" matSuffix
+                          >keyboard_arrow_down</mat-icon
+                        >
+                        <mat-autocomplete
+                          #acRelationship
+                          (optionSelected)="onrelationshiplist()"
+                          [displayWith]="displayFnRel"
+                        >
+                          <mat-option
+                            *ngFor="let relationship of filteredRelationship"
+                            [value]="relationship.id"
+                            [title]="relationship.name"
+                          >
+                            {{ relationship.name }}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                      <!-- </div> -->
+                    </div>
+                    <div class="col-md-2 rela_padd">
+                      <button
+                        style="margin-top: 5px; width: 100%;"
+                        mat-raised-button
+                        (click)="searchGrid()"
+                        color="primary"
+                      >
+                        Search
+                      </button>
+                    </div>
+                    <div class="col-md-2 pad_top_sm">
+                      <button
+                        style="
+                          margin-top: 5px;
+                          width: 100%;
+                          background-color: #404040;
+                        "
+                        mat-raised-button
+                        (click)="profileNameText = ''"
+                        data-toggle="modal"
+                        data-target="#myModal"
+                        color="primary"
+                      >
+                        Save Profile
+                      </button>
+                      <div class="pt-5">
+                        <mat-form-field>
+                          <input
+                            placeholder="Profile"
+                            matInput
+                            [(ngModel)]="profileDDList"
+                            (ngModelChange)="doProfileFilter()"
+                            [matAutocomplete]="acProfile"
+                            (blur)="onProfileBlur()"
+                            type="text"
+                          />
+                          <mat-icon class="icon-suffix" matSuffix
+                            >keyboard_arrow_down</mat-icon
+                          >
+                          <mat-autocomplete
+                            #acProfile
+                            (optionSelected)="onprofileDDList()"
+                          >
+                            <mat-option
+                              *ngFor="let profile of filteredProfile"
+                              [value]="profile"
+                              [title]="profile"
+                            >
+                              {{ profile }}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin: 5px;">
+          <div
+            class="col-md-8 m-l--15"
+            *ngIf="visiable && gridData && gridData.length > 0"
+          >
+            <div class="row">
+              <div class="col-md-4 p-l-20">
+                <label for="power"
+                  >Total Relationship Count : {{ totalValue }}</label
+                >
+              </div>
+              <div class="col-md-4">
+                <mat-checkbox
+                  (change)="onFilterCheckBoxClick()"
+                  [checked]="rowFilter"
+                  >{{ "Hide empty rows & columns" }}
+                </mat-checkbox>
+              </div>
+              <div class="col-md-4">
+                <mat-checkbox (change)="onCheckBoxClick()" [checked]="show_id"
+                  >Show ID</mat-checkbox
+                >
+              </div>
+            </div>
+
+            <!-- <div *ngFor="let question of relationShipCountList; let i = index">
+              <label for="power">
+                {{ question.name }} : {{ question.count }}</label
+              >
+            </div> -->
+          </div>
+        </div>
+        <div id="table-container">
+          <div
+            id="table-scroll"
+            class="table-scroll card-box"
+            *ngIf="gridData && gridData.length > 0; else nodata_placeholder"
+          >
+            <table id="main-table" class="main-table">
+              <thead>
+                <tr>
+                  <th
+                    style="
+                      height: 20px;
+                      width: 130px;
+                      overflow: hidden;
+                      min-width: 60px;
+                    "
+                  >
+                    <div class="diag">
+                      <div
+                        style="text-align: right; padding: 0px 10px 10px 10px;"
+                      >
+                        Target
+                      </div>
+                      <div class="sec">
+                        Source
+                      </div>
+                    </div>
+                  </th>
+                  <th
+                    *ngFor="let row of target"
+                    data-toggle="tooltip"
+                    class="rel-header"
+                    title="{{ row }}"
+                  >
+                    {{ row }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of gridData; let i = index">
+                  <td
+                    class="rowhdr rel-header"
+                    data-toggle="tooltip"
+                    title="{{ row }}"
+                  >
+                    {{ row }}
+                  </td>
+                  <!-- [title]="row + ' -> ' + target[j]" -->
+                  <!-- data-toggle="modal"
+                data-target="#myDropDownModal" -->
+                  <td
+                    class="grid-cell"
+                    *ngFor="let row1 of relationship[i]; let j = index"
+                    (click)="RowSelected($event, row, j)"
+                    (touchstart)="touchstart($event, row, j)"
+                    attr.data-sourcename="{{ row }}"
+                    attr.data-targetname="{{ target[j] }}"
+                    title="{{
+                      row1 ? getRelByImage(row1) : row + ' -> ' + target[j]
+                    }}"
+                    (click)="relationshiplist_save = ''"
+                  >
+                    <!-- <div *ngIf="row1 != ''" class="mat-icon-button"> -->
+                    <div *ngIf="row1 != ''" class="mat-icon-button">
+                      <img
+                        src="{{ baseURL }}{{ row1 }}"
+                        width="20"
+                        height="20"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <ng-template #nodata_placeholder>
+          <div class="card card-box s-m-10 justify-content-center">
+            <div>
+              <div class="card-body">
+                <p class="card-text">No relationships found.</p>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Profile Name</h2>
+            <button
+              style="float: right; margin-top: -5px;"
+              id="btnProfileClose"
+              mat-icon-button
+              data-dismiss="modal"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <div class="modal-body filterheaderrow">
+            <!-- <p>This is a small modal.</p> -->
+            <mat-form-field>
+              <input
+                placeholder="Profile Name"
+                matInput
+                [(ngModel)]="profileNameText"
+                type="text"
+              />
+            </mat-form-field>
+            <!-- <button (click)="targetSearch()" mat-icon-button class="search-icon"> -->
+            <!-- <mat-icon>search</mat-icon> -->
+            <!-- </button> -->
+            <div class="btn-sec p-t-15 text-right">
+              <button (click)="saveProfile()" mat-raised-button color="primary">
+                Save Profile
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Save</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Drop Down Modal -->
+    <div class="modal fade" id="myDropDownModal" role="dialog">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">
+              {{ getRelPopupName() }}
+            </h2>
+            <button
+              style="float: right; margin-top: -5px;"
+              mat-icon-button
+              id="btnRelationshipClose"
+              data-dismiss="modal"
+            >
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+          <div class="modal-body filterheaderrow">
+            <div *ngIf="show_list" class="table-scroll card-box">
+              <table id="rel-table" class="main-table">
+                <thead>
+                  <tr>
+                    <th style="text-align: center;">
+                      Relationship
+                    </th>
+
+                    <th style="text-align: center;">
+                      Delete
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="
+                      let relationshipname of relationshiplist_name;
+                      index as i
+                    "
+                  >
+                    <td style="text-align: center; vertical-align: middle;">
+                      {{ relationshipname.name }}
+                    </td>
+
+                    <td style="text-align: center; vertical-align: middle;">
+                      <button
+                        class="btn btn-tbl-edit-nlh mat-icon-button tblActnBtn h-auto"
+                        (click)="
+                          deleterelationshiplistname(i, relationshipname.id)
+                        "
+                        title="Delete"
+                      >
+                        <img
+                          src="assets/images/icon/bin.png"
+                          width="20"
+                          height="20"
+                        />
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <mat-form-field>
+              <input
+                placeholder="Relationship"
+                matInput
+                [(ngModel)]="relationshiplist_save"
+                (ngModelChange)="doPopRelationshipFilter()"
+                [matAutocomplete]="acPopRelationship"
+                (blur)="onPopRelationshipBlur()"
+                type="text"
+              />
+              <mat-icon class="icon-suffix" matSuffix
+                >keyboard_arrow_down</mat-icon
+              >
+              <mat-autocomplete
+                #acPopRelationship
+                [displayWith]="displayFnRel"
+                (optionSelected)="onrelationshiplist_save()"
+              >
+                <mat-option
+                  *ngFor="let relationship of filteredPopRelationship"
+                  [value]="relationship.id"
+                >
+                  {{ relationship.name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="btn-sec p-b-20 p-r-25 text-right">
+            <button (click)="assign()" mat-raised-button color="primary">
+              Assign
+            </button>
+          </div>
+          <div class="modal-footer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

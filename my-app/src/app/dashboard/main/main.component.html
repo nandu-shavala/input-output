@@ -1,0 +1,31 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Vehicle Programs</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/dashboard/main"> Home</a>
+            </li>
+            <li class="breadcrumb-item active">Dashboard</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- Widgets -->
+        <div class="row cards mob">
+      <div class="col-md-3 col-sm-6" *ngFor="let program of vehiclePrograms">
+        <div
+          class="counter-box text-center"
+          (click)="gotopage('dashboard/validation-types', program.id)"
+        >
+          <div class="icon"><img src="{{ program.image }}" /></div>
+          <h5 class="m-t-10 prog">{{ program.name }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
